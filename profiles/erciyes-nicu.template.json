@@ -29,7 +29,9 @@
     "maxVolumePerKg": null
   },
   "energy": {
-    "targetKcalPerKg": { "min": null, "max": null }
+    "_help": "targetKcalPerKg: kcal/kg/day range. kcalPerGram: energy density per gram (reference/product-dependent).",
+    "targetKcalPerKg": { "min": null, "max": null },
+    "kcalPerGram": { "carbohydrate": null, "protein": null, "fat": null }
   },
   "glucose": {
     "_help": "GIR in mg/kg/min. maxConc* = max dextrose % by line type.",
@@ -66,13 +68,31 @@
     "vitamins": { "enabled": true, "dosePerKg": null },
     "heparin": { "enabled": false, "dosePerKg": 0 }
   },
+  "osmolarity": {
+    "_help": "Linear estimate coefficients. dextrose/aminoAcid: mOsm per gram. electrolyteMOsmPerUnit: mOsm per units.electrolyte per ion. peripheralMaxMOsmPerL: peripheral-line upper limit.",
+    "dextroseMOsmPerGram": null,
+    "aminoAcidMOsmPerGram": null,
+    "electrolyteMOsmPerUnit": {
+      "sodium": null,
+      "potassium": null,
+      "calcium": null,
+      "magnesium": null,
+      "phosphate": null,
+      "chloride": null
+    },
+    "peripheralMaxMOsmPerL": null
+  },
+  "caPhosphate": {
+    "_help": "maxSolubilityProduct: max tolerated Ca x P product in the final admixture (e.g. (mmol/L)^2). Approximation only — see docs/PROFILE.md.",
+    "maxSolubilityProduct": null
+  },
   "safety": {
     "defaultLine": "central",
     "rules": [
       { "id": "gir-max", "level": "hard", "ref": "glucose.girMax", "message": "GIR upper limit exceeded." },
       { "id": "dextrose-peripheral-max", "level": "hard", "ref": "glucose.maxConcPeripheral", "message": "Dextrose concentration too high for a peripheral line." },
-      { "id": "osmolarity-peripheral", "level": "hard", "threshold": null, "message": "Osmolarity upper limit exceeded for a peripheral line." },
-      { "id": "ca-phosphate-precipitation", "level": "hard", "message": "Calcium-phosphate precipitation risk." },
+      { "id": "osmolarity-peripheral", "level": "hard", "ref": "osmolarity.peripheralMaxMOsmPerL", "message": "Osmolarity upper limit exceeded for a peripheral line." },
+      { "id": "ca-phosphate-precipitation", "level": "hard", "ref": "caPhosphate.maxSolubilityProduct", "message": "Calcium-phosphate precipitation risk." },
       { "id": "volume-overflow", "level": "soft", "ref": "fluid.maxVolumePerKg", "message": "Total volume exceeds the upper limit." }
     ]
   }

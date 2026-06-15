@@ -58,7 +58,7 @@ See [`docs/PROFILE.md`](./docs/PROFILE.md) and the
 ## Roadmap
 
 - [x] **Phase 0** — Design lock: domain model, profile schema, plan
-- [ ] **Phase 1** — `@tpn/engine`: calculation core + test suite
+- [x] **Phase 1** — `@tpn/engine`: calculation core + test suite
 - [ ] **Phase 2** — Mobile MVP (Expo)
 - [ ] **Phase 3** — Profile management UI + units
 - [ ] **Phase 4** — Web app + live demo

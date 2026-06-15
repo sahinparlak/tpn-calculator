@@ -29,6 +29,7 @@ a profile directly determines the correctness of the output.
 | `fluid` | `phototherapyAdjMlPerKg`, `radiantWarmerAdjMlPerKg` | Adjustments | ml/kg/day |
 | `fluid` | `maxVolumePerKg` | Upper limit | ml/kg/day |
 | `energy` | `targetKcalPerKg` | Target calorie range | kcal/kg/day |
+| `energy` | `kcalPerGram` | Energy density: carbohydrate / protein / fat | kcal/g |
 | `glucose` | `girStart` / `girAdvance` / `girMax` | GIR schedule | mg/kg/min |
 | `glucose` | `maxConcPeripheral` / `maxConcCentral` | Max dextrose | % |
 | `glucose` | `stockConcentrations` | Available stocks | % (list) |
@@ -36,7 +37,11 @@ a profile directly determines the correctness of the output.
 | `aminoAcid`, `lipid` | `doseStart` / `doseAdvance` / `doseMax` | Dose schedule | g/kg/day |
 | `electrolytes.*` | `dosePerKg` | Daily dose | `units.electrolyte`/kg/day |
 | `electrolytes.*` | `stockConcentration` | Stock solution | units/mL |
-| `additives.*` | `enabled`, `dosePerKg` | Additives | units/kg/day |
+| `additives.*` | `enabled`, `dosePerKg` | Additives (dose modeled as ml/kg/day) | ml/kg/day |
+| `osmolarity` | `dextroseMOsmPerGram`, `aminoAcidMOsmPerGram` | Osmolarity coefficients | mOsm/g |
+| `osmolarity` | `electrolyteMOsmPerUnit.*` | Per-ion coefficient | mOsm per electrolyte unit |
+| `osmolarity` | `peripheralMaxMOsmPerL` | Peripheral-line upper limit | mOsm/L |
+| `caPhosphate` | `maxSolubilityProduct` | Max tolerated Ca × P product | (e.g. (mmol/L)²) |
 | `safety.defaultLine` | — | Default line | `peripheral` / `central` |
 | `safety.rules` | `level` | `hard` blocks, `soft` warns | — |
 
@@ -50,3 +55,13 @@ Each rule either **references** a profile value
 - `soft` — only a **warning** is shown.
 
 Which rules are hard or soft is entirely the center's choice.
+
+## Osmolarity and Ca–P models
+
+Osmolarity is estimated as a **linear sum** over the aqueous admixture: each
+component contributes `amount × coefficient`, divided by the volume in litres.
+The coefficients depend on your products and chosen reference formula, so they
+live in the profile. The calcium–phosphate check uses the **simple solubility
+product** (Ca × P concentrations) against `caPhosphate.maxSolubilityProduct` —
+an approximation only; true compatibility depends on the amino-acid product, pH,
+temperature and mixing order. Set both from your center's source.

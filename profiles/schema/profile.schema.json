@@ -16,6 +16,8 @@
     "lipid",
     "electrolytes",
     "additives",
+    "osmolarity",
+    "caPhosphate",
     "safety"
   ],
   "properties": {
@@ -77,9 +79,19 @@
     "energy": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["targetKcalPerKg"],
+      "required": ["targetKcalPerKg", "kcalPerGram"],
       "properties": {
-        "targetKcalPerKg": { "$ref": "#/$defs/range" }
+        "targetKcalPerKg": { "$ref": "#/$defs/range" },
+        "kcalPerGram": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["carbohydrate", "protein", "fat"],
+          "properties": {
+            "carbohydrate": { "type": "number", "exclusiveMinimum": 0 },
+            "protein": { "type": "number", "exclusiveMinimum": 0 },
+            "fat": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        }
       }
     },
     "glucose": {
@@ -122,6 +134,37 @@
         "traceElements": { "$ref": "#/$defs/additive" },
         "vitamins": { "$ref": "#/$defs/additive" },
         "heparin": { "$ref": "#/$defs/additive" }
+      }
+    },
+    "osmolarity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dextroseMOsmPerGram", "aminoAcidMOsmPerGram", "electrolyteMOsmPerUnit", "peripheralMaxMOsmPerL"],
+      "properties": {
+        "dextroseMOsmPerGram": { "type": "number", "minimum": 0 },
+        "aminoAcidMOsmPerGram": { "type": "number", "minimum": 0 },
+        "electrolyteMOsmPerUnit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sodium", "potassium", "calcium", "magnesium", "phosphate", "chloride"],
+          "properties": {
+            "sodium": { "type": "number", "minimum": 0 },
+            "potassium": { "type": "number", "minimum": 0 },
+            "calcium": { "type": "number", "minimum": 0 },
+            "magnesium": { "type": "number", "minimum": 0 },
+            "phosphate": { "type": "number", "minimum": 0 },
+            "chloride": { "type": "number", "minimum": 0 }
+          }
+        },
+        "peripheralMaxMOsmPerL": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "caPhosphate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxSolubilityProduct"],
+      "properties": {
+        "maxSolubilityProduct": { "type": "number", "exclusiveMinimum": 0 }
       }
     },
     "safety": {

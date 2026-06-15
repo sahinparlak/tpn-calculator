@@ -64,8 +64,24 @@ export interface FluidConfig {
   maxVolumePerKg: number;
 }
 
+/**
+ * Energy density of each macronutrient. These are reference/product-dependent
+ * (e.g. dextrose monohydrate vs anhydrous; the glycerol load of a lipid
+ * emulsion), so — like every other clinical value — they live in the profile
+ * rather than being hardcoded in the engine.
+ */
+export interface EnergyFactors {
+  /** kcal per gram of carbohydrate (dextrose) */
+  carbohydrate: number;
+  /** kcal per gram of amino acid (protein) */
+  protein: number;
+  /** kcal per gram of lipid */
+  fat: number;
+}
+
 export interface EnergyConfig {
   targetKcalPerKg: Range;
+  kcalPerGram: EnergyFactors;
 }
 
 export interface GlucoseConfig {
@@ -121,6 +137,48 @@ export interface AdditivesConfig {
   heparin: AdditiveEntry;
 }
 
+/**
+ * Coefficients for the osmolarity estimate. Osmolarity is modeled as a linear
+ * sum: each component contributes `amount × coefficient`, and the total is
+ * divided by the aqueous admixture volume. The coefficients themselves depend
+ * on the products and reference formula a center uses, so they come from the
+ * profile; the engine only owns the linear structure.
+ */
+export interface OsmolarityElectrolyteCoefficients {
+  /** mOsm per profile electrolyte unit (mmol or mEq, per `units.electrolyte`) */
+  sodium: number;
+  potassium: number;
+  calcium: number;
+  magnesium: number;
+  phosphate: number;
+  chloride: number;
+}
+
+export interface OsmolarityConfig {
+  /** mOsm contributed per gram of dextrose */
+  dextroseMOsmPerGram: number;
+  /** mOsm contributed per gram of amino acid */
+  aminoAcidMOsmPerGram: number;
+  /** mOsm contributed per electrolyte unit, per ion */
+  electrolyteMOsmPerUnit: OsmolarityElectrolyteCoefficients;
+  /** Upper osmolarity limit for a peripheral line (mOsm/L) */
+  peripheralMaxMOsmPerL: number;
+}
+
+/**
+ * Calcium–phosphate precipitation model. Phase 1 uses the simple solubility
+ * product (Ca concentration × P concentration in the final admixture). This is
+ * an approximation — true compatibility depends on the amino-acid product, pH,
+ * temperature and order of mixing — so the threshold is a center value.
+ */
+export interface CaPhosphateConfig {
+  /**
+   * Maximum tolerated Ca × P product. Units follow the center's model
+   * (e.g. (mmol/L)² when `units.electrolyte` is mmol).
+   */
+  maxSolubilityProduct: number;
+}
+
 export interface SafetyRule {
   id: string;
   level: SafetyLevel;
@@ -147,6 +205,8 @@ export interface TPNProfile {
   lipid: MacronutrientConfig;
   electrolytes: ElectrolyteConfig;
   additives: AdditivesConfig;
+  osmolarity: OsmolarityConfig;
+  caPhosphate: CaPhosphateConfig;
   safety: SafetyConfig;
 }
 
@@ -192,6 +252,20 @@ export interface EnergyResult {
   };
 }
 
+/** Cross-cutting derived totals, exposed for transparency and the safety layer. */
+export interface DerivedTotals {
+  /** Delivered fluid in ml/kg/day after adjustments and any restriction */
+  prescribedMlPerKg: number;
+  /** Aqueous admixture volume (total minus lipid emulsion), ml */
+  aqueousVolumeMl: number;
+  /** Lipid emulsion volume, ml */
+  lipidVolumeMl: number;
+  /** Water available to carry dextrose (aqueous minus other aqueous additions), ml */
+  dextroseWaterMl: number;
+  /** Calcium × phosphate solubility product in the final admixture */
+  caPhosphateProduct: number;
+}
+
 export interface TPNResult {
   totalVolumeMl: number;
   fluid: ComponentResult;
@@ -202,5 +276,6 @@ export interface TPNResult {
   additives: ComponentResult[];
   energy: EnergyResult;
   osmolarityMOsmPerL: number;
+  derived: DerivedTotals;
   warnings: Warning[];
 }
