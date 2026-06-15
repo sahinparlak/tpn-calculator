@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/sahinparlak/tpn-calculator/profiles/schema/profile.schema.json",
   "title": "TPN Center Profile",
-  "description": "Merkeze özgü TPN yapılandırması. Tüm klinik değerler buradadır; motor hiçbir değeri varsaymaz.",
+  "description": "Center-specific TPN configuration. All clinical values live here; the engine assumes nothing.",
   "type": "object",
   "additionalProperties": false,
   "required": [

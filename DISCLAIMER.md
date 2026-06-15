@@ -1,6 +1,4 @@
-# Clinical Disclaimer / Klinik Sorumluluk Reddi
-
-## English
+# Clinical Disclaimer
 
 This software is a **clinical decision-support tool**, not a medical device and
 not a substitute for professional medical judgment.
@@ -16,20 +14,3 @@ not a substitute for professional medical judgment.
   from the use of this software (see `LICENSE`).
 
 By using this software you acknowledge and accept these terms.
-
-## Türkçe
-
-Bu yazılım bir **klinik karar destek aracıdır**; tıbbi cihaz değildir ve
-hekimin mesleki değerlendirmesinin yerini almaz.
-
-- Tüm hesaplamalar, kullanıcının sağladığı **merkeze özgü yapılandırma
-  profiline** dayanır. Her sonucun doğruluğu, bu profilin ve girilen verilerin
-  doğruluğuna tamamen bağlıdır.
-- Yazılım, bir profilin güncel, güvenli veya yerel olarak onaylanmış klinik
-  uygulamayı yansıttığını **denetlemez**.
-- **Reçeteyi yazan hekim, her reçeteden tam ve münhasıran sorumludur.**
-  Klinik kullanımdan önce sonuçları daima bağımsız olarak doğrulayın.
-- Yazarlar ve katkıda bulunanlar, bu yazılımın kullanımından doğabilecek hiçbir
-  zarardan **sorumlu değildir** (bkz. `LICENSE`).
-
-Bu yazılımı kullanarak bu koşulları kabul etmiş sayılırsınız.

@@ -1,13 +1,13 @@
 {
   "$schema": "./schema/profile.schema.json",
-  "_NOT": "Bu bir ŞABLONDUR. null = doldurulacak klinik değer, 'DOLDUR' = doldurulacak metin. Tüm değerler kendi kaynağınızdan girilmeden motor kullanılmamalıdır. Doldurunca '_NOT' ve '_yardim' alanlarını silin.",
+  "_note": "This is a TEMPLATE. null = clinical value to fill in, 'FILL_ME' = text to fill in. The engine must not be used until every value is entered from your own source. After filling in, delete the '_note' and '_help' keys.",
   "meta": {
-    "name": "Erciyes Üniversitesi YYBÜ",
+    "name": "Erciyes University NICU",
     "version": "0.1.0",
-    "locale": "tr-TR",
-    "lastReviewed": "DOLDUR-YYYY-AA-GG",
-    "reviewedBy": "DOLDUR",
-    "description": "Yenidoğan yoğun bakım TPN protokolü."
+    "locale": "en",
+    "lastReviewed": "FILL_ME-YYYY-MM-DD",
+    "reviewedBy": "FILL_ME",
+    "description": "Neonatal intensive care unit TPN protocol."
   },
   "units": {
     "energy": "kcal",
@@ -18,7 +18,7 @@
     "usesGestationalAge": true
   },
   "fluid": {
-    "_yardim": "schedulePerKg: yaşa göre ml/kg/gün. dayTo:null => o günden sonrası.",
+    "_help": "schedulePerKg: ml/kg/day by age. dayTo:null => that day and onward.",
     "schedulePerKg": [
       { "dayFrom": 1, "dayTo": 1, "mlPerKg": null },
       { "dayFrom": 2, "dayTo": 2, "mlPerKg": null },
@@ -32,7 +32,7 @@
     "targetKcalPerKg": { "min": null, "max": null }
   },
   "glucose": {
-    "_yardim": "GIR mg/kg/dk. maxConc* = damar yoluna göre maks dekstroz %.",
+    "_help": "GIR in mg/kg/min. maxConc* = max dextrose % by line type.",
     "girStart": null,
     "girAdvance": null,
     "girMax": null,
@@ -41,19 +41,19 @@
     "stockConcentrations": [null]
   },
   "aminoAcid": {
-    "product": { "name": "DOLDUR", "concentrationPct": null },
+    "product": { "name": "FILL_ME", "concentrationPct": null },
     "doseStart": null,
     "doseAdvance": null,
     "doseMax": null
   },
   "lipid": {
-    "product": { "name": "DOLDUR (ör. SMOFlipid / Intralipid)", "concentrationPct": null },
+    "product": { "name": "FILL_ME (e.g. SMOFlipid / Intralipid)", "concentrationPct": null },
     "doseStart": null,
     "doseAdvance": null,
     "doseMax": null
   },
   "electrolytes": {
-    "_yardim": "dosePerKg = units.electrolyte cinsinden /kg/gün. stockConcentration = birim/mL.",
+    "_help": "dosePerKg = units.electrolyte per kg/day. stockConcentration = units/mL.",
     "sodium": { "dosePerKg": null, "stockConcentration": null },
     "potassium": { "dosePerKg": null, "stockConcentration": null },
     "calcium": { "dosePerKg": null, "stockConcentration": null },
@@ -69,11 +69,11 @@
   "safety": {
     "defaultLine": "central",
     "rules": [
-      { "id": "gir-max", "level": "hard", "ref": "glucose.girMax", "message": "GIR üst sınırı aşıldı." },
-      { "id": "dextrose-peripheral-max", "level": "hard", "ref": "glucose.maxConcPeripheral", "message": "Periferik için dekstroz konsantrasyonu yüksek." },
-      { "id": "osmolarity-peripheral", "level": "hard", "threshold": null, "message": "Periferik için ozmolarite üst sınırı aşıldı." },
-      { "id": "ca-phosphate-precipitation", "level": "hard", "message": "Kalsiyum-fosfat çökelme riski." },
-      { "id": "volume-overflow", "level": "soft", "ref": "fluid.maxVolumePerKg", "message": "Toplam hacim üst sınırı aştı." }
+      { "id": "gir-max", "level": "hard", "ref": "glucose.girMax", "message": "GIR upper limit exceeded." },
+      { "id": "dextrose-peripheral-max", "level": "hard", "ref": "glucose.maxConcPeripheral", "message": "Dextrose concentration too high for a peripheral line." },
+      { "id": "osmolarity-peripheral", "level": "hard", "threshold": null, "message": "Osmolarity upper limit exceeded for a peripheral line." },
+      { "id": "ca-phosphate-precipitation", "level": "hard", "message": "Calcium-phosphate precipitation risk." },
+      { "id": "volume-overflow", "level": "soft", "ref": "fluid.maxVolumePerKg", "message": "Total volume exceeds the upper limit." }
     ]
   }
 }

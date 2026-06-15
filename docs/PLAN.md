@@ -1,79 +1,82 @@
-# TPN Hesaplayıcı — Proje Planı
+# TPN Calculator — Project Plan
 
-## 1. Vizyon ve temel ilke
+## 1. Vision and core principle
 
-Yenidoğan/pediatrik parenteral nütrisyon hesabını **merkez bağımsız** yapan açık
-kaynak bir karar destek aracı. Temel tasarım kararı: **hiçbir klinik değer koda
-gömülmez.** Tüm dozlar, limitler, ürün konsantrasyonları ve varsayılanlar bir
-**merkez profili** (konfigürasyon) içinde tanımlanır. Aynı motor her merkezde
-çalışır; yalnızca profil değişir.
+An open-source clinical decision-support tool that makes neonatal/pediatric
+parenteral nutrition calculations **center-independent**. The central design
+decision: **no clinical value is hardcoded.** All doses, limits, product
+concentrations and defaults are defined in a **center profile**
+(configuration). The same engine runs at every center; only the profile changes.
 
-## 2. Mimari: iki katman
+## 2. Architecture: two layers
 
 ```
-┌─────────────────────────────────────────┐
-│  UI Katmanı (Expo mobil + React/Next web)│  ← sunum, klinik mantık YOK
-├─────────────────────────────────────────┤
-│  @tpn/engine (saf TS, %100 test)          │  ← kalbi; çerçeve bilmez
-│  + Profil şeması (merkez yapılandırması)  │
-└─────────────────────────────────────────┘
+┌───────────────────────────────────────────┐
+│  UI layer (Expo mobile + React/Next web)   │  ← presentation, NO clinical logic
+├───────────────────────────────────────────┤
+│  @tpn/engine (pure TS, fully tested)        │  ← the core; framework-agnostic
+│  + Profile schema (center configuration)   │
+└───────────────────────────────────────────┘
 ```
 
-Motor saf bir kütüphanedir: girdi (hasta + profil) → çıktı (reçete + uyarılar).
-Arayüzü bilmez, böylece hem mobilde hem webde hem testlerde aynen çalışır.
-Klinik güvenliğin merkezi burasıdır; bu katmanda yüksek test kapsamı zorunludur.
+The engine is a pure library: input (patient + profile) → output (prescription +
+warnings). It knows nothing about the UI, so it runs identically on mobile, on
+web, and in tests. This is the center of clinical safety; high test coverage
+here is mandatory.
 
-## 3. Teknoloji yığını (kilitli)
+## 3. Technology stack (locked)
 
-- **Monorepo:** npm workspaces (Expo ile en uyumlu; ileride pnpm'e geçiş kolay)
-- **`@tpn/engine`:** saf TypeScript, npm'e yayınlanabilir çekirdek
-- **`apps/mobile`:** Expo (React Native) — iOS + Android (önce)
-- **`apps/web`:** React/Next — tarayıcıda canlı demo (sonra)
-- **Test:** Vitest · **CI:** GitHub Actions · **Lisans:** MIT
+- **Monorepo:** npm workspaces (best Expo compatibility; easy to switch to pnpm later)
+- **`@tpn/engine`:** pure TypeScript, publishable npm core
+- **`apps/mobile`:** Expo (React Native) — iOS + Android (first)
+- **`apps/web`:** React/Next — live in-browser demo (next)
+- **Test:** Vitest · **CI:** GitHub Actions · **License:** MIT
+- **Language:** English-first; no localization initially.
 
-## 4. Domain modeli
+## 4. Domain model
 
-Motorun ürettikleri (her eşik/doz **profilden** gelir):
+What the engine produces (every threshold/dose comes from the **profile**):
 
-| Bileşen | Hesap | Profilden gelen |
+| Component | Calculation | Comes from the profile |
 |---|---|---|
-| Sıvı | yaş/kg'a göre toplam hacim | başlangıç & ilerleme şeması, düzeltmeler, max |
-| Enerji | toplam kcal/kg, dağılım | hedef kalori aralığı |
-| Glukoz/GIR | GIR (mg/kg/dk), final dekstroz % | başlangıç/max GIR, max konsantrasyon |
-| Amino asit | g/kg → hacim | doz şeması, ürün ve % |
-| Lipid | g/kg → hacim | doz şeması, ürün ve % |
-| Elektrolit | Na/K/Ca/Mg/P/Cl | doz aralıkları, stok konsantrasyonlar, birim |
-| Eklenenler | eser element, vitamin, heparin | varlık/doz |
+| Fluid | total volume by age/kg | start & advancement schedule, adjustments, max |
+| Energy | total kcal/kg, distribution | target calorie range |
+| Glucose/GIR | GIR (mg/kg/min), final dextrose % | start/max GIR, max concentration |
+| Amino acid | g/kg → volume | dose schedule, product and % |
+| Lipid | g/kg → volume | dose schedule, product and % |
+| Electrolytes | Na/K/Ca/Mg/P/Cl | dose ranges, stock concentrations, unit |
+| Additives | trace elements, vitamins, heparin | presence/dose |
 
-**Türetilen kritik çıktılar:** kalan su hacmi, final dekstroz konsantrasyonu,
-**ozmolarite** (periferik/santral kararı), kalori dağılımı, toplam hacim uyumu.
+**Key derived outputs:** remaining water volume, final dextrose concentration,
+**osmolarity** (peripheral/central decision), calorie distribution, total volume
+check.
 
-## 5. Klinik güvenlik katmanı
+## 5. Clinical safety layer
 
-- **Sınır uyarıları:** GIR, periferik ozmolarite/dekstroz, elektrolit limitleri,
-  **Ca-P çökelme riski**, hacim taşması. Her eşik profilden.
-- **hard vs soft:** engelle mi, uyar mı — profilde tanımlı.
-- **Disclaimer:** açılışta ve çıktıda görünür klinik sorumluluk reddi.
-- **Doğrulama veri seti:** referans vakalarla regresyon testleri.
-- **Birim sistemi:** kcal/kJ, mmol/mEq — uluslararası kullanım için.
+- **Limit warnings:** GIR, peripheral osmolarity/dextrose, electrolyte limits,
+  **Ca-P precipitation risk**, volume overflow. Every threshold from the profile.
+- **hard vs soft:** block or warn — defined in the profile.
+- **Disclaimer:** a visible clinical disclaimer at startup and on output.
+- **Validation dataset:** regression tests with reference cases.
+- **Unit system:** kcal/kJ, mmol/mEq — for international use.
 
-## 6. Yol haritası
+## 6. Roadmap
 
-0. **Tasarım kilidi** ✅ — domain modeli, profil şeması, repo iskeleti, plan.
-1. **Motor** — `@tpn/engine` hesap mantığı + kapsamlı testler + örnek profiller.
-2. **Mobil MVP** — Expo: tek hasta hesabı, tek profil, çıktı + uyarılar.
-3. **Konfigürasyon UI** — profil seçme/düzenleme, birim sistemi, çoklu profil.
-4. **Web** — aynı motordan web sürümü + canlı demo (GitHub Pages/Vercel).
-5. **Uluslararasılaştırma** — çoklu dil, dokümantasyon sitesi, topluluk altyapısı.
+0. **Design lock** ✅ — domain model, profile schema, repo scaffold, plan.
+1. **Engine** — `@tpn/engine` calculation logic + comprehensive tests + sample profiles.
+2. **Mobile MVP** — Expo: single-patient calculation, single profile, output + warnings.
+3. **Configuration UI** — profile selection/editing, unit system, multiple profiles.
+4. **Web** — web build from the same engine + live demo (GitHub Pages/Vercel).
+5. **Internationalization** — additional languages (English-first), docs site, community infrastructure.
 
-## 7. Lisans ve hukuk
+## 7. License and legal
 
-**MIT** — en serbest, herkes kullanır/değiştirir/dağıtır; "AS IS" maddesiyle
-yasal koruma sağlar. Tıbbi araç olduğu için ayrıca görünür bir **klinik
-disclaimer** ([`../DISCLAIMER.md`](../DISCLAIMER.md)) eklenmiştir.
+**MIT** — the most permissive; anyone may use/modify/distribute, and its "AS IS"
+clause provides legal protection. Because this is a medical tool, a visible
+**clinical disclaimer** ([`../DISCLAIMER.md`](../DISCLAIMER.md)) is also included.
 
-## 8. Prestij ölçütleri (sürdürülen)
+## 8. Prestige criteria (ongoing)
 
-Çalışan canlı demo · yüksek test kapsamı + yeşil CI · cilalı README · npm'e
-yayınlanmış yeniden kullanılabilir çekirdek · temiz mimari · sürüm etiketleri ·
-`CONTRIBUTING` + issue şablonları · dokümantasyon.
+Working live demo · high test coverage + green CI · polished README · reusable
+core published to npm · clean architecture · release tags · `CONTRIBUTING` +
+issue templates · documentation.

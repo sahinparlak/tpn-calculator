@@ -1,50 +1,52 @@
-# Merkez Profili Yazma Rehberi
+# Profile Authoring Guide
 
-Bir profil, motorun kullandığı **tüm klinik değerleri** tutar. Motor hiçbir doz,
-limit veya birim varsaymaz; hepsi buradan gelir. Bu yüzden bir profilin
-doğruluğu, çıktının doğruluğunu birebir belirler.
+A profile holds **all the clinical values** the engine uses. The engine assumes
+no dose, limit or unit; everything comes from here. Therefore the correctness of
+a profile directly determines the correctness of the output.
 
-> **Sorumluluk:** Profildeki her değer, merkezinizin **onaylı protokolünden veya
-> güvenilir bir klinik kaynaktan** girilmelidir. Bkz. [`../DISCLAIMER.md`](../DISCLAIMER.md).
+> **Responsibility:** Every value in a profile must be entered from your
+> center's **approved protocol or a trusted clinical source**. See
+> [`../DISCLAIMER.md`](../DISCLAIMER.md).
 
-## Nasıl başlanır
+## Getting started
 
-1. [`../profiles/erciyes-nicu.template.json`](../profiles/erciyes-nicu.template.json)
-   dosyasını kopyalayın, kendi merkez adınızla yeniden adlandırın.
-2. `null` olan her klinik değeri ve `DOLDUR` yazan her metni doldurun.
-3. Doldurduktan sonra yardımcı `_NOT` ve `_yardim` anahtarlarını **silin**
-   (şema bunlara izin vermez; doğrulama ancak temizleyince geçer).
-4. [JSON Şeması](../profiles/schema/profile.schema.json) ile doğrulayın.
+1. Copy [`../profiles/erciyes-nicu.template.json`](../profiles/erciyes-nicu.template.json)
+   and rename it for your center.
+2. Fill in every clinical value that is `null` and every text marked `FILL_ME`.
+3. After filling in, **delete** the helper `_note` and `_help` keys (the schema
+   does not allow them; validation only passes once they are removed).
+4. Validate against the [JSON Schema](../profiles/schema/profile.schema.json).
 
-## Alanlar
+## Fields
 
-| Bölüm | Alan | Anlamı | Birim |
+| Section | Field | Meaning | Unit |
 |---|---|---|---|
-| `meta` | `name`, `version`, `locale`, `lastReviewed`, `reviewedBy` | Kimlik ve izlenebilirlik | — |
-| `units` | `energy` | Enerji birimi | `kcal` / `kJ` |
-| `units` | `electrolyte` | Elektrolit birimi | `mmol` / `mEq` |
-| `patient` | `ageBasis` | Yaş temeli | `dayOfLife` / `postmenstrualAge` |
-| `fluid` | `schedulePerKg` | Yaşa göre sıvı | ml/kg/gün |
-| `fluid` | `phototherapyAdjMlPerKg`, `radiantWarmerAdjMlPerKg` | Düzeltmeler | ml/kg/gün |
-| `fluid` | `maxVolumePerKg` | Üst sınır | ml/kg/gün |
-| `energy` | `targetKcalPerKg` | Hedef kalori aralığı | kcal/kg/gün |
-| `glucose` | `girStart` / `girAdvance` / `girMax` | GIR şeması | mg/kg/dk |
-| `glucose` | `maxConcPeripheral` / `maxConcCentral` | Maks dekstroz | % |
-| `glucose` | `stockConcentrations` | Mevcut stoklar | % (liste) |
-| `aminoAcid`, `lipid` | `product` | Ürün adı + konsantrasyon | % |
-| `aminoAcid`, `lipid` | `doseStart` / `doseAdvance` / `doseMax` | Doz şeması | g/kg/gün |
-| `electrolytes.*` | `dosePerKg` | Günlük doz | `units.electrolyte`/kg/gün |
-| `electrolytes.*` | `stockConcentration` | Stok çözelti | birim/mL |
-| `additives.*` | `enabled`, `dosePerKg` | Eklenenler | birim/kg/gün |
-| `safety.defaultLine` | — | Varsayılan damar yolu | `peripheral` / `central` |
-| `safety.rules` | `level` | `hard` engeller, `soft` uyarır | — |
+| `meta` | `name`, `version`, `locale`, `lastReviewed`, `reviewedBy` | Identity and traceability | — |
+| `units` | `energy` | Energy unit | `kcal` / `kJ` |
+| `units` | `electrolyte` | Electrolyte unit | `mmol` / `mEq` |
+| `patient` | `ageBasis` | Age basis | `dayOfLife` / `postmenstrualAge` |
+| `fluid` | `schedulePerKg` | Fluid by age | ml/kg/day |
+| `fluid` | `phototherapyAdjMlPerKg`, `radiantWarmerAdjMlPerKg` | Adjustments | ml/kg/day |
+| `fluid` | `maxVolumePerKg` | Upper limit | ml/kg/day |
+| `energy` | `targetKcalPerKg` | Target calorie range | kcal/kg/day |
+| `glucose` | `girStart` / `girAdvance` / `girMax` | GIR schedule | mg/kg/min |
+| `glucose` | `maxConcPeripheral` / `maxConcCentral` | Max dextrose | % |
+| `glucose` | `stockConcentrations` | Available stocks | % (list) |
+| `aminoAcid`, `lipid` | `product` | Product name + concentration | % |
+| `aminoAcid`, `lipid` | `doseStart` / `doseAdvance` / `doseMax` | Dose schedule | g/kg/day |
+| `electrolytes.*` | `dosePerKg` | Daily dose | `units.electrolyte`/kg/day |
+| `electrolytes.*` | `stockConcentration` | Stock solution | units/mL |
+| `additives.*` | `enabled`, `dosePerKg` | Additives | units/kg/day |
+| `safety.defaultLine` | — | Default line | `peripheral` / `central` |
+| `safety.rules` | `level` | `hard` blocks, `soft` warns | — |
 
-## Güvenlik kuralları
+## Safety rules
 
-Her kural ya bir profil değerine **referans** verir (`"ref": "glucose.girMax"`)
-ya da sabit bir **eşik** taşır (`"threshold": 900`). `level`:
+Each rule either **references** a profile value
+(`"ref": "glucose.girMax"`) or carries a fixed **threshold**
+(`"threshold": 900`). `level`:
 
-- `hard` — sınır aşılırsa sonuç **engellenir / kırmızı uyarı**.
-- `soft` — yalnızca **uyarı** gösterilir.
+- `hard` — if the limit is exceeded, the result is **blocked / red warning**.
+- `soft` — only a **warning** is shown.
 
-Hangi kuralların hard/soft olacağı tamamen merkezin tercihidir.
+Which rules are hard or soft is entirely the center's choice.

@@ -1,8 +1,8 @@
 # apps/
 
-Uygulama katmanı — her ikisi de `@tpn/engine`'i tüketir, klinik mantık içermez.
+Application layer — both consume `@tpn/engine` and contain no clinical logic.
 
-- `apps/mobile/` — **Expo (React Native)**, iOS + Android. **Faz 2** (önce bu).
-- `apps/web/` — **React/Next**, tarayıcıda canlı demo. **Faz 4**.
+- `apps/mobile/` — **Expo (React Native)**, iOS + Android. **Phase 2** (built first).
+- `apps/web/` — **React/Next**, live in-browser demo. **Phase 4**.
 
-Bu klasörler ilgili fazlarda iskelelendirilecektir.
+These folders will be scaffolded in their respective phases.

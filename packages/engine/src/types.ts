@@ -1,12 +1,12 @@
 /**
- * @tpn/engine — Domain model (Faz 0 tasarım kilidi)
+ * @tpn/engine — Domain model (Phase 0 design lock)
  *
- * KURAL: Bu dosyada ve tüm motorda HİÇBİR klinik sabit bulunmaz.
- * Tüm doz, limit, ürün ve birim bilgisi `TPNProfile` üzerinden gelir.
+ * RULE: This file — and the entire engine — contains NO clinical constants.
+ * All doses, limits, products and units come from the `TPNProfile`.
  */
 
 // ---------------------------------------------------------------------------
-// Birimler ve ortak tipler
+// Units and shared types
 // ---------------------------------------------------------------------------
 
 export type EnergyUnit = 'kcal' | 'kJ';
@@ -14,7 +14,7 @@ export type ElectrolyteUnit = 'mmol' | 'mEq';
 export type AgeBasis = 'dayOfLife' | 'postmenstrualAge';
 export type LineType = 'peripheral' | 'central';
 
-/** hard = sınır aşılırsa engelle, soft = yalnızca uyar */
+/** hard = block when the limit is exceeded, soft = warn only */
 export type SafetyLevel = 'hard' | 'soft';
 
 export interface Range {
@@ -23,19 +23,19 @@ export interface Range {
 }
 
 // ---------------------------------------------------------------------------
-// Profil (merkeze özgü yapılandırma) — motorun klinik bilgi kaynağı
+// Profile (center-specific configuration) — the engine's clinical data source
 // ---------------------------------------------------------------------------
 
 export interface ProfileMeta {
-  /** Merkez/protokol adı */
+  /** Center / protocol name */
   name: string;
-  /** Semantik sürüm, ör. "1.0.0" */
+  /** Semantic version, e.g. "1.0.0" */
   version: string;
-  /** BCP-47 dil etiketi, ör. "tr-TR" */
+  /** BCP-47 language tag, e.g. "en" */
   locale: string;
-  /** Son klinik gözden geçirme tarihi (ISO 8601) */
+  /** Date of last clinical review (ISO 8601) */
   lastReviewed: string;
-  /** Gözden geçirmeden sorumlu hekim */
+  /** Clinician responsible for the review */
   reviewedBy: string;
   description?: string;
 }
@@ -50,7 +50,7 @@ export interface PatientModelConfig {
   usesGestationalAge: boolean;
 }
 
-/** Yaşa göre sıvı basamağı. `dayTo: null` => ve sonrası */
+/** Age-based fluid step. `dayTo: null` => that day and onward */
 export interface FluidStep {
   dayFrom: number;
   dayTo: number | null;
@@ -69,15 +69,15 @@ export interface EnergyConfig {
 }
 
 export interface GlucoseConfig {
-  /** mg/kg/dk */
+  /** mg/kg/min */
   girStart: number;
   girAdvance: number;
   girMax: number;
-  /** Periferik damar yolu için izin verilen maksimum dekstroz yüzdesi */
+  /** Maximum allowed dextrose percentage for a peripheral line */
   maxConcPeripheral: number;
-  /** Santral damar yolu için izin verilen maksimum dekstroz yüzdesi */
+  /** Maximum allowed dextrose percentage for a central line */
   maxConcCentral: number;
-  /** Merkezde mevcut stok dekstroz konsantrasyonları (%) */
+  /** Dextrose stock concentrations available at the center (%) */
   stockConcentrations: number[];
 }
 
@@ -88,16 +88,16 @@ export interface MacronutrientProduct {
 
 export interface MacronutrientConfig {
   product: MacronutrientProduct;
-  /** g/kg/gün */
+  /** g/kg/day */
   doseStart: number;
   doseAdvance: number;
   doseMax: number;
 }
 
 export interface ElectrolyteEntry {
-  /** Birim profile.units.electrolyte cinsinden, /kg/gün */
+  /** Dose in profile.units.electrolyte units, per kg/day */
   dosePerKg: number;
-  /** Kullanılan stok çözeltinin konsantrasyonu (birim/mL) */
+  /** Concentration of the stock solution used (units/mL) */
   stockConcentration: number;
 }
 
@@ -124,9 +124,9 @@ export interface AdditivesConfig {
 export interface SafetyRule {
   id: string;
   level: SafetyLevel;
-  /** Profildeki bir değere referans, ör. "glucose.girMax" */
+  /** Reference to a profile value, e.g. "glucose.girMax" */
   ref?: string;
-  /** Sabit eşik (ref yoksa) */
+  /** Fixed threshold (when there is no ref) */
   threshold?: number;
   message?: string;
 }
@@ -151,23 +151,23 @@ export interface TPNProfile {
 }
 
 // ---------------------------------------------------------------------------
-// Hasta girdisi
+// Patient input
 // ---------------------------------------------------------------------------
 
 export interface PatientInput {
   weightKg: number;
-  /** Postnatal gün (ageBasis'e göre yorumlanır) */
+  /** Postnatal day (interpreted per ageBasis) */
   ageDays: number;
   gestationalAgeWeeks?: number;
   line: LineType;
   phototherapy?: boolean;
   radiantWarmer?: boolean;
-  /** Order edilen sıvı kısıtlaması (toplam hedefin yüzdesi, 0-100) */
+  /** Ordered fluid restriction (percentage of the total target, 0-100) */
   fluidRestrictionPct?: number;
 }
 
 // ---------------------------------------------------------------------------
-// Çıktı
+// Output
 // ---------------------------------------------------------------------------
 
 export interface ComponentResult {
