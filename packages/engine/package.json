@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Framework-agnostic TPN calculation engine. All clinical values come from a center profile; none are hardcoded.",
   "license": "MIT",
-  "author": "Şahin Parlak",
+  "author": "Sahin Parlak",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

@@ -4,7 +4,7 @@
   "private": true,
   "description": "Configurable parenteral nutrition (TPN) calculator for neonatal and pediatric patients.",
   "license": "MIT",
-  "author": "Şahin Parlak",
+  "author": "Sahin Parlak",
   "type": "module",
   "workspaces": [
     "packages/*",

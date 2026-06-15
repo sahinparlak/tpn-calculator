@@ -68,4 +68,4 @@ Full plan: [`docs/PLAN.md`](./docs/PLAN.md).
 
 ## License
 
-[MIT](./LICENSE) © 2026 Şahin Parlak
+[MIT](./LICENSE) © 2026 Sahin Parlak
