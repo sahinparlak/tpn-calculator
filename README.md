@@ -6,6 +6,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/sahinparlak/tpn-calculator/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/sahinparlak/tpn-calculator/actions/workflows/ci.yml/badge.svg"></a>
   <a href="#license"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <img alt="Status: early development" src="https://img.shields.io/badge/status-early%20development-orange.svg">
 </p>
