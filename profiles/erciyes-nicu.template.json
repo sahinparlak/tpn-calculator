@@ -1,0 +1,79 @@
+{
+  "$schema": "./schema/profile.schema.json",
+  "_NOT": "Bu bir ŞABLONDUR. null = doldurulacak klinik değer, 'DOLDUR' = doldurulacak metin. Tüm değerler kendi kaynağınızdan girilmeden motor kullanılmamalıdır. Doldurunca '_NOT' ve '_yardim' alanlarını silin.",
+  "meta": {
+    "name": "Erciyes Üniversitesi YYBÜ",
+    "version": "0.1.0",
+    "locale": "tr-TR",
+    "lastReviewed": "DOLDUR-YYYY-AA-GG",
+    "reviewedBy": "DOLDUR",
+    "description": "Yenidoğan yoğun bakım TPN protokolü."
+  },
+  "units": {
+    "energy": "kcal",
+    "electrolyte": "mmol"
+  },
+  "patient": {
+    "ageBasis": "dayOfLife",
+    "usesGestationalAge": true
+  },
+  "fluid": {
+    "_yardim": "schedulePerKg: yaşa göre ml/kg/gün. dayTo:null => o günden sonrası.",
+    "schedulePerKg": [
+      { "dayFrom": 1, "dayTo": 1, "mlPerKg": null },
+      { "dayFrom": 2, "dayTo": 2, "mlPerKg": null },
+      { "dayFrom": 3, "dayTo": null, "mlPerKg": null }
+    ],
+    "phototherapyAdjMlPerKg": null,
+    "radiantWarmerAdjMlPerKg": null,
+    "maxVolumePerKg": null
+  },
+  "energy": {
+    "targetKcalPerKg": { "min": null, "max": null }
+  },
+  "glucose": {
+    "_yardim": "GIR mg/kg/dk. maxConc* = damar yoluna göre maks dekstroz %.",
+    "girStart": null,
+    "girAdvance": null,
+    "girMax": null,
+    "maxConcPeripheral": null,
+    "maxConcCentral": null,
+    "stockConcentrations": [null]
+  },
+  "aminoAcid": {
+    "product": { "name": "DOLDUR", "concentrationPct": null },
+    "doseStart": null,
+    "doseAdvance": null,
+    "doseMax": null
+  },
+  "lipid": {
+    "product": { "name": "DOLDUR (ör. SMOFlipid / Intralipid)", "concentrationPct": null },
+    "doseStart": null,
+    "doseAdvance": null,
+    "doseMax": null
+  },
+  "electrolytes": {
+    "_yardim": "dosePerKg = units.electrolyte cinsinden /kg/gün. stockConcentration = birim/mL.",
+    "sodium": { "dosePerKg": null, "stockConcentration": null },
+    "potassium": { "dosePerKg": null, "stockConcentration": null },
+    "calcium": { "dosePerKg": null, "stockConcentration": null },
+    "magnesium": { "dosePerKg": null, "stockConcentration": null },
+    "phosphate": { "dosePerKg": null, "stockConcentration": null },
+    "chloride": { "dosePerKg": null, "stockConcentration": null }
+  },
+  "additives": {
+    "traceElements": { "enabled": true, "dosePerKg": null },
+    "vitamins": { "enabled": true, "dosePerKg": null },
+    "heparin": { "enabled": false, "dosePerKg": 0 }
+  },
+  "safety": {
+    "defaultLine": "central",
+    "rules": [
+      { "id": "gir-max", "level": "hard", "ref": "glucose.girMax", "message": "GIR üst sınırı aşıldı." },
+      { "id": "dextrose-peripheral-max", "level": "hard", "ref": "glucose.maxConcPeripheral", "message": "Periferik için dekstroz konsantrasyonu yüksek." },
+      { "id": "osmolarity-peripheral", "level": "hard", "threshold": null, "message": "Periferik için ozmolarite üst sınırı aşıldı." },
+      { "id": "ca-phosphate-precipitation", "level": "hard", "message": "Kalsiyum-fosfat çökelme riski." },
+      { "id": "volume-overflow", "level": "soft", "ref": "fluid.maxVolumePerKg", "message": "Toplam hacim üst sınırı aştı." }
+    ]
+  }
+}

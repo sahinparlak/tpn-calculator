@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sahinparlak/tpn-calculator/profiles/schema/profile.schema.json",
+  "title": "TPN Center Profile",
+  "description": "Merkeze özgü TPN yapılandırması. Tüm klinik değerler buradadır; motor hiçbir değeri varsaymaz.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "units",
+    "patient",
+    "fluid",
+    "energy",
+    "glucose",
+    "aminoAcid",
+    "lipid",
+    "electrolytes",
+    "additives",
+    "safety"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "locale", "lastReviewed", "reviewedBy"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "locale": { "type": "string", "minLength": 2 },
+        "lastReviewed": { "type": "string", "format": "date" },
+        "reviewedBy": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" }
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["energy", "electrolyte"],
+      "properties": {
+        "energy": { "enum": ["kcal", "kJ"] },
+        "electrolyte": { "enum": ["mmol", "mEq"] }
+      }
+    },
+    "patient": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ageBasis", "usesGestationalAge"],
+      "properties": {
+        "ageBasis": { "enum": ["dayOfLife", "postmenstrualAge"] },
+        "usesGestationalAge": { "type": "boolean" }
+      }
+    },
+    "fluid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schedulePerKg", "phototherapyAdjMlPerKg", "radiantWarmerAdjMlPerKg", "maxVolumePerKg"],
+      "properties": {
+        "schedulePerKg": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["dayFrom", "dayTo", "mlPerKg"],
+            "properties": {
+              "dayFrom": { "type": "integer", "minimum": 0 },
+              "dayTo": { "type": ["integer", "null"], "minimum": 0 },
+              "mlPerKg": { "type": "number", "exclusiveMinimum": 0 }
+            }
+          }
+        },
+        "phototherapyAdjMlPerKg": { "type": "number" },
+        "radiantWarmerAdjMlPerKg": { "type": "number" },
+        "maxVolumePerKg": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "energy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targetKcalPerKg"],
+      "properties": {
+        "targetKcalPerKg": { "$ref": "#/$defs/range" }
+      }
+    },
+    "glucose": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["girStart", "girAdvance", "girMax", "maxConcPeripheral", "maxConcCentral", "stockConcentrations"],
+      "properties": {
+        "girStart": { "type": "number", "exclusiveMinimum": 0 },
+        "girAdvance": { "type": "number", "exclusiveMinimum": 0 },
+        "girMax": { "type": "number", "exclusiveMinimum": 0 },
+        "maxConcPeripheral": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+        "maxConcCentral": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+        "stockConcentrations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 }
+        }
+      }
+    },
+    "aminoAcid": { "$ref": "#/$defs/macronutrient" },
+    "lipid": { "$ref": "#/$defs/macronutrient" },
+    "electrolytes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sodium", "potassium", "calcium", "magnesium", "phosphate", "chloride"],
+      "properties": {
+        "sodium": { "$ref": "#/$defs/electrolyte" },
+        "potassium": { "$ref": "#/$defs/electrolyte" },
+        "calcium": { "$ref": "#/$defs/electrolyte" },
+        "magnesium": { "$ref": "#/$defs/electrolyte" },
+        "phosphate": { "$ref": "#/$defs/electrolyte" },
+        "chloride": { "$ref": "#/$defs/electrolyte" }
+      }
+    },
+    "additives": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["traceElements", "vitamins", "heparin"],
+      "properties": {
+        "traceElements": { "$ref": "#/$defs/additive" },
+        "vitamins": { "$ref": "#/$defs/additive" },
+        "heparin": { "$ref": "#/$defs/additive" }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["defaultLine", "rules"],
+      "properties": {
+        "defaultLine": { "enum": ["peripheral", "central"] },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "level"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "level": { "enum": ["hard", "soft"] },
+              "ref": { "type": "string" },
+              "threshold": { "type": "number" },
+              "message": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min", "max"],
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" }
+      }
+    },
+    "macronutrient": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["product", "doseStart", "doseAdvance", "doseMax"],
+      "properties": {
+        "product": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "concentrationPct"],
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "concentrationPct": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 }
+          }
+        },
+        "doseStart": { "type": "number", "minimum": 0 },
+        "doseAdvance": { "type": "number", "minimum": 0 },
+        "doseMax": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "electrolyte": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dosePerKg", "stockConcentration"],
+      "properties": {
+        "dosePerKg": { "type": "number", "minimum": 0 },
+        "stockConcentration": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "additive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "dosePerKg"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "dosePerKg": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}
