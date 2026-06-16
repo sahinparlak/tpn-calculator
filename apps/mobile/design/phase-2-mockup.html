@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TPN Hesaplayıcı — Faz 2 Mockup (Modern Editöryel)</title>
+    <title>TPN Calculator — Phase 2 Mockup (Modern Editorial)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,7 +21,7 @@
               numeric: ['Fraunces', 'Georgia', 'serif'],
             },
             colors: {
-              // Direction C — Modern Editöryel: warm off-white ground, navy accent,
+              // Direction C — Modern Editorial: warm off-white ground, navy accent,
               // warm near-black ink. `slate` is repointed to warm greys so the whole
               // mockup shifts cool→warm in one move. Red/amber are reserved for safety.
               ground: '#f7f6f3',
@@ -54,22 +54,22 @@
   <body class="font-sans text-ink antialiased">
     <!-- ===================== Review chrome ===================== -->
     <header class="mx-auto max-w-2xl px-5 pt-8 pb-2 text-center">
-      <h1 class="text-xl font-semibold">TPN Hesaplayıcı — Faz 2 mockup</h1>
+      <h1 class="text-xl font-semibold">TPN Calculator — Phase 2 mockup</h1>
       <p class="mt-1 text-sm text-slate-500">
-        Stil: <span class="font-medium text-slate-700">Modern Editöryel</span> ·
-        Fraunces serif başlık · lacivert vurgu · güvenlik renkleri sabit (kırmızı = hard, amber = soft)
+        Style: <span class="font-medium text-slate-700">Modern Editorial</span> ·
+        Fraunces serif headings · navy accent · safety colors fixed (red = hard, amber = soft)
       </p>
       <p class="mt-1 text-xs text-slate-400">
-        Sayılar gerçek <code class="rounded bg-slate-200/70 px-1">@tpn/engine</code> çıktısıdır
-        (preterm 1.8 kg · gün 5). Aşağıdaki butonlarla ekranlar arası gezin.
+        Numbers are real <code class="rounded bg-slate-200/70 px-1">@tpn/engine</code> output
+        (preterm 1.8 kg · day 5). Use the buttons below to move between screens.
       </p>
 
       <!-- Screen rail -->
       <nav class="mt-4 inline-flex flex-wrap justify-center gap-1.5 rounded-2xl bg-white p-1.5 shadow-sm ring-1 ring-slate-200">
         <button data-go="disclaimer" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">1 · Disclaimer</button>
-        <button data-go="input" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">2 · Hasta girişi</button>
-        <button data-go="results" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">3 · Sonuç</button>
-        <button data-go="profile" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">4 · Profil</button>
+        <button data-go="input" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">2 · Patient</button>
+        <button data-go="results" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">3 · Result</button>
+        <button data-go="profile" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">4 · Profile</button>
       </nav>
     </header>
 
@@ -88,16 +88,16 @@
             <section id="disclaimer" class="screen active flex min-h-full flex-col px-6 pb-8 pt-8">
               <div class="mb-10 flex items-center gap-2">
                 <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-accent-600 text-sm font-bold text-white">T</div>
-                <span class="text-sm font-semibold tracking-tight text-slate-700">TPN Hesaplayıcı</span>
+                <span class="text-sm font-semibold tracking-tight text-slate-700">TPN Calculator</span>
               </div>
 
               <div class="flex-1">
-                <h2 class="font-display text-[28px] font-semibold leading-tight tracking-tight">Başlamadan önce</h2>
+                <h2 class="font-display text-[28px] font-semibold leading-tight tracking-tight">Before you start</h2>
                 <p class="mt-3 text-[16px] leading-relaxed text-slate-600">
-                  TPN Hesaplayıcı bir klinisyen tarafından geliştirildi. Hesapları güncel klinik
-                  kılavuza dayanır, her değer <span class="font-semibold text-ink">kaynağına
-                  izlenebilir</span> ve güvenlik sınırlarını sana açıkça gösterir. Son karar her
-                  zaman <span class="font-semibold text-ink">sende</span>.
+                  TPN Calculator was built by a clinician. Its calculations follow current clinical
+                  guidance, every value is <span class="font-semibold text-ink">traceable to its
+                  source</span>, and it shows safety limits clearly. The final decision is always
+                  <span class="font-semibold text-ink">yours</span>.
                 </p>
 
                 <div class="mt-5 flex items-stretch overflow-hidden rounded-2xl border border-slate-200 bg-white">
@@ -108,19 +108,19 @@
                   <div class="w-px bg-slate-100"></div>
                   <div class="flex flex-1 flex-col items-center gap-1.5 px-2 py-3.5 text-center">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-accent-600"><path d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-                    <p class="text-[11px] font-medium text-slate-600">Kaynaklı</p>
+                    <p class="text-[11px] font-medium text-slate-600">Traceable</p>
                   </div>
                   <div class="w-px bg-slate-100"></div>
                   <div class="flex flex-1 flex-col items-center gap-1.5 px-2 py-3.5 text-center">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-accent-600"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
-                    <p class="text-[11px] font-medium text-slate-600">Güvenlik</p>
+                    <p class="text-[11px] font-medium text-slate-600">Safety</p>
                   </div>
                 </div>
 
                 <div class="mt-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3.5">
                   <p class="text-[14px] leading-relaxed text-amber-800">
-                    Etkin profil: <b>ESPGHAN 2018 referansı</b> — rehber-temelli, merkez-validasyonlu
-                    değil. Sonuçları kendi protokolünle doğrula.
+                    Active profile: <b>ESPGHAN 2018 reference</b> — guideline-based, not
+                    center-validated. Verify results against your own protocol.
                   </p>
                 </div>
               </div>
@@ -128,7 +128,7 @@
               <div class="mt-8">
                 <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3.5">
                   <input id="consent" type="checkbox" class="mt-0.5 h-5 w-5 shrink-0 accent-accent-600" />
-                  <span class="text-[14px] font-medium leading-snug text-slate-700">Nitelikli hekimim; <button id="termsLink" type="button" class="font-semibold text-accent-700 underline decoration-accent-300 underline-offset-2">koşulları</button> kabul ediyor ve sorumluluğu üstleniyorum.</span>
+                  <span class="text-[14px] font-medium leading-snug text-slate-700">I'm a qualified clinician; I accept the <button id="termsLink" type="button" class="font-semibold text-accent-700 underline decoration-accent-300 underline-offset-2">terms</button> and take responsibility.</span>
                 </label>
                 <button
                   id="acceptBtn"
@@ -136,34 +136,34 @@
                   disabled
                   class="mt-3 w-full rounded-2xl bg-accent-600 py-4 text-[15px] font-semibold text-white shadow-sm transition disabled:cursor-not-allowed disabled:bg-slate-300"
                 >
-                  Devam et
+                  Continue
                 </button>
                 <p class="mt-3 text-center text-xs text-slate-400">
-                  Onay bir kez alınır · sorumluluk notu Sonuç ekranında görünür kalır
+                  Accepted once · the disclaimer stays visible on the Result screen
                 </p>
               </div>
             </section>
 
-            <!-- ---------- SCREEN 2: HASTA GİRİŞİ ---------- -->
+            <!-- ---------- SCREEN 2: PATIENT INPUT ---------- -->
             <section id="input" class="screen px-6 pb-10 pt-4">
               <div class="mb-4 flex items-center justify-between">
-                <h2 class="font-display text-2xl font-semibold tracking-tight">Hasta</h2>
-                <button data-go="profile" class="text-sm font-medium text-accent-700">Profil ›</button>
+                <h2 class="font-display text-2xl font-semibold tracking-tight">Patient</h2>
+                <button data-go="profile" class="text-sm font-medium text-accent-700">Profile ›</button>
               </div>
 
               <!-- active profile chip -->
               <button data-go="profile" class="mb-5 flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-left">
                 <div>
-                  <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Etkin profil</p>
+                  <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Active profile</p>
                   <p class="mt-0.5 text-[15px] font-semibold">ESPGHAN 2018 Reference</p>
-                  <p class="mt-0.5 text-xs text-amber-700">rehber-temelli referans · merkez-validasyonlu değil</p>
+                  <p class="mt-0.5 text-xs text-amber-700">guideline-based reference · not center-validated</p>
                 </div>
                 <span class="text-slate-300">›</span>
               </button>
 
               <!-- weight -->
               <div class="mb-4">
-                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Kilo <span class="font-normal text-slate-400">(kg)</span></label>
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Weight <span class="font-normal text-slate-400">(kg)</span></label>
                 <div class="flex items-center rounded-2xl border border-slate-200 bg-white px-4 py-3 focus-within:border-accent-600">
                   <input value="1.8" inputmode="decimal" class="tnum w-full bg-transparent text-2xl font-semibold outline-none" />
                   <span class="text-sm font-medium text-slate-400">kg</span>
@@ -172,50 +172,50 @@
 
               <!-- age -->
               <div class="mb-4">
-                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Yaş <span class="font-normal text-slate-400">(gün)</span></label>
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Age <span class="font-normal text-slate-400">(days)</span></label>
                 <div class="flex items-center rounded-2xl border border-slate-200 bg-white px-4 py-3 focus-within:border-accent-600">
                   <input value="5" inputmode="numeric" class="tnum w-full bg-transparent text-2xl font-semibold outline-none" />
-                  <span class="text-sm font-medium text-slate-400">gün</span>
+                  <span class="text-sm font-medium text-slate-400">days</span>
                 </div>
               </div>
 
               <!-- line segmented -->
               <div class="mb-5">
-                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Hat tipi</label>
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Line type</label>
                 <div class="grid grid-cols-2 gap-1 rounded-2xl bg-slate-200/70 p-1">
-                  <button data-line="peripheral" class="seg-in rounded-xl py-2.5 text-sm font-semibold">Periferik</button>
-                  <button data-line="central" class="seg-in rounded-xl py-2.5 text-sm font-semibold">Santral</button>
+                  <button data-line="peripheral" class="seg-in rounded-xl py-2.5 text-sm font-semibold">Peripheral</button>
+                  <button data-line="central" class="seg-in rounded-xl py-2.5 text-sm font-semibold">Central</button>
                 </div>
-                <p class="mt-1.5 text-xs text-slate-400">Varsayılan profilden gelir (santral). Periferik seçilirse ozmolarite/dekstroz sınırları daha katıdır.</p>
+                <p class="mt-1.5 text-xs text-slate-400">Default comes from the profile (central). Peripheral applies stricter osmolarity/dextrose limits.</p>
               </div>
 
               <!-- optional section -->
-              <p class="mb-3 text-[11px] font-semibold uppercase tracking-wide text-slate-400">İsteğe bağlı</p>
+              <p class="mb-3 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Optional</p>
 
               <div class="mb-4">
-                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Gebelik haftası <span class="font-normal text-slate-400">(opsiyonel)</span></label>
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Gestational age <span class="font-normal text-slate-400">(optional)</span></label>
                 <div class="flex items-center rounded-2xl border border-slate-200 bg-white px-4 py-3">
                   <input placeholder="—" inputmode="numeric" class="tnum w-full bg-transparent text-lg font-semibold outline-none placeholder:text-slate-300" />
-                  <span class="text-sm font-medium text-slate-400">hafta</span>
+                  <span class="text-sm font-medium text-slate-400">weeks</span>
                 </div>
               </div>
 
               <div class="mb-3 flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3.5">
-                <span class="text-[15px] font-medium text-slate-700">Fototerapi</span>
+                <span class="text-[15px] font-medium text-slate-700">Phototherapy</span>
                 <span class="toggle relative h-7 w-12 rounded-full bg-slate-300 transition" data-on="false">
                   <span class="dot absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow transition"></span>
                 </span>
               </div>
 
               <div class="mb-3 flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3.5">
-                <span class="text-[15px] font-medium text-slate-700">Radyan ısıtıcı</span>
+                <span class="text-[15px] font-medium text-slate-700">Radiant warmer</span>
                 <span class="toggle relative h-7 w-12 rounded-full bg-slate-300 transition" data-on="false">
                   <span class="dot absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow transition"></span>
                 </span>
               </div>
 
               <div class="mb-5">
-                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Sıvı kısıtı <span class="font-normal text-slate-400">(%)</span></label>
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Fluid restriction <span class="font-normal text-slate-400">(%)</span></label>
                 <div class="flex items-center rounded-2xl border border-slate-200 bg-white px-4 py-3">
                   <input placeholder="0" inputmode="numeric" class="tnum w-full bg-transparent text-lg font-semibold outline-none placeholder:text-slate-300" />
                   <span class="text-sm font-medium text-slate-400">%</span>
@@ -224,56 +224,56 @@
 
               <!-- validation error preview -->
               <button id="errToggle" class="mb-4 w-full rounded-xl border border-dashed border-slate-300 py-2 text-xs font-medium text-slate-400">
-                ↳ doğrulama hatası önizlemesini aç/kapat
+                ↳ toggle validation-error preview
               </button>
               <div id="errExample" class="mb-4 hidden rounded-2xl border border-red-200 bg-red-50 p-3">
-                <p class="text-[13px] font-semibold text-red-700">Kilo 0'dan büyük olmalı.</p>
-                <p class="mt-0.5 text-xs text-red-500">Geçersiz girişler satır içinde, ilgili alanın altında kırmızı gösterilir (TPNInputError).</p>
+                <p class="text-[13px] font-semibold text-red-700">Weight must be greater than 0.</p>
+                <p class="mt-0.5 text-xs text-red-500">Invalid input is shown inline, in red, under the relevant field (TPNInputError).</p>
               </div>
 
               <button data-go="results" class="w-full rounded-2xl bg-accent-600 py-4 text-[15px] font-semibold text-white shadow-sm">
-                Hesapla
+                Calculate
               </button>
             </section>
 
-            <!-- ---------- SCREEN 3: SONUÇ ---------- -->
+            <!-- ---------- SCREEN 3: RESULT ---------- -->
             <section id="results" class="screen px-6 pb-12 pt-4">
               <div class="mb-3 flex items-center justify-between">
-                <button data-go="input" class="text-sm font-medium text-accent-700">‹ Düzenle</button>
-                <h2 class="font-display text-xl font-semibold tracking-tight">Sonuç</h2>
-                <button data-go="profile" class="text-sm font-medium text-accent-700">Profil ›</button>
+                <button data-go="input" class="text-sm font-medium text-accent-700">‹ Edit</button>
+                <h2 class="font-display text-xl font-semibold tracking-tight">Result</h2>
+                <button data-go="profile" class="text-sm font-medium text-accent-700">Profile ›</button>
               </div>
 
               <!-- line switch (drives warnings) -->
               <div class="mb-4 grid grid-cols-2 gap-1 rounded-2xl bg-slate-200/70 p-1">
-                <button data-rline="peripheral" class="seg-r rounded-xl py-2 text-sm font-semibold">Periferik</button>
-                <button data-rline="central" class="seg-r rounded-xl py-2 text-sm font-semibold">Santral</button>
+                <button data-rline="peripheral" class="seg-r rounded-xl py-2 text-sm font-semibold">Peripheral</button>
+                <button data-rline="central" class="seg-r rounded-xl py-2 text-sm font-semibold">Central</button>
               </div>
 
               <!-- HARD warning banner (peripheral) — solid, dominant (C language) -->
               <div id="hardBanner" class="mb-4 rounded-2xl bg-[#7f1d1d] p-4 text-white">
                 <div class="flex items-center gap-2">
                   <span class="text-lg">⛔</span>
-                  <p class="font-display text-[16px] font-semibold">Bağımsız doğrulama olmadan kullanılmamalı</p>
+                  <p class="font-display text-[16px] font-semibold">Must not be used without independent verification</p>
                 </div>
-                <p class="mt-1 text-[13px] text-red-100/90">2 hard güvenlik sınırı aşıldı:</p>
+                <p class="mt-1 text-[13px] text-red-100/90">2 hard safety limits exceeded:</p>
                 <ul class="mt-2 space-y-1.5">
                   <li><span class="font-mono text-[11px] rounded bg-white/15 px-1.5 py-0.5 font-medium">dextrose-peripheral-max</span></li>
-                  <li class="pl-1 text-[13px] text-red-50/95">Dekstroz konsantrasyonu periferik hat için fazla yüksek.</li>
+                  <li class="pl-1 text-[13px] text-red-50/95">Dextrose concentration too high for a peripheral line.</li>
                   <li><span class="font-mono text-[11px] rounded bg-white/15 px-1.5 py-0.5 font-medium">osmolarity-peripheral</span></li>
-                  <li class="pl-1 text-[13px] text-red-50/95">Periferik hat için ozmolarite üst sınırı aşıldı.</li>
+                  <li class="pl-1 text-[13px] text-red-50/95">Osmolarity upper limit exceeded for a peripheral line.</li>
                 </ul>
               </div>
 
               <!-- clean state (central) — neutral, no green (color reserved for safety) -->
               <div id="cleanBanner" class="mb-4 hidden rounded-2xl border border-slate-200 bg-white p-4">
-                <p class="text-[14px] font-semibold text-ink">✓ Sınır uyarısı yok</p>
-                <p class="mt-0.5 text-[13px] text-slate-500">Bu hat için hard/soft güvenlik sınırı aşılmadı. Yine de sonuçları bağımsız doğrulayın.</p>
+                <p class="text-[14px] font-semibold text-ink">✓ No limit warnings</p>
+                <p class="mt-0.5 text-[13px] text-slate-500">No hard/soft safety limits exceeded for this line. Still, verify results independently.</p>
               </div>
 
               <!-- hero -->
               <div class="mb-4 rounded-2xl border border-slate-200 bg-white p-5">
-                <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-400">Toplam hacim</p>
+                <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-400">Total volume</p>
                 <div class="mt-1 flex items-baseline gap-3">
                   <span class="numeric text-[52px] font-semibold leading-none tracking-tight">270</span>
                   <span class="text-lg font-medium text-slate-400">mL</span>
@@ -283,21 +283,21 @@
 
               <!-- cards -->
               <div class="space-y-3">
-                <!-- glukoz -->
+                <!-- glucose -->
                 <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Glukoz</p>
+                  <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Glucose</p>
                   <div class="grid grid-cols-2 gap-y-2 text-[14px]">
-                    <span class="text-slate-500">GIR</span><span class="tnum text-right font-semibold">12 <span class="text-xs font-normal text-slate-400">mg/kg/dk</span></span>
-                    <span class="text-slate-500">Final dekstroz</span><span class="tnum text-right font-semibold">%22.8</span>
-                    <span class="text-slate-500">Miktar</span><span class="tnum text-right font-semibold">31.1 <span class="text-xs font-normal text-slate-400">g</span></span>
-                    <span class="text-slate-500">Hacim</span><span class="tnum text-right font-semibold">136.6 <span class="text-xs font-normal text-slate-400">mL</span></span>
+                    <span class="text-slate-500">GIR</span><span class="tnum text-right font-semibold">12 <span class="text-xs font-normal text-slate-400">mg/kg/min</span></span>
+                    <span class="text-slate-500">Final dextrose</span><span class="tnum text-right font-semibold">22.8%</span>
+                    <span class="text-slate-500">Amount</span><span class="tnum text-right font-semibold">31.1 <span class="text-xs font-normal text-slate-400">g</span></span>
+                    <span class="text-slate-500">Volume</span><span class="tnum text-right font-semibold">136.6 <span class="text-xs font-normal text-slate-400">mL</span></span>
                   </div>
                 </div>
 
-                <!-- AA + lipid -->
+                <!-- amino acid + lipid -->
                 <div class="grid grid-cols-2 gap-3">
                   <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                    <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Amino asit</p>
+                    <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Amino acid</p>
                     <p class="numeric text-3xl font-semibold">3.5 <span class="font-sans text-sm font-normal text-slate-400">g/kg</span></p>
                     <p class="tnum mt-1 text-[13px] text-slate-500">6.3 g · 63 mL</p>
                   </div>
@@ -308,45 +308,45 @@
                   </div>
                 </div>
 
-                <!-- elektrolitler -->
+                <!-- electrolytes -->
                 <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p class="mb-3 font-display text-[13px] font-semibold text-slate-700">Elektrolitler</p>
+                  <p class="mb-3 font-display text-[13px] font-semibold text-slate-700">Electrolytes</p>
                   <table class="tnum w-full text-[13px]">
                     <thead>
                       <tr class="text-[11px] uppercase tracking-wide text-slate-400">
-                        <th class="text-left font-semibold pb-1.5">İyon</th>
+                        <th class="text-left font-semibold pb-1.5">Ion</th>
                         <th class="text-right font-semibold pb-1.5">mmol/kg</th>
-                        <th class="text-right font-semibold pb-1.5">toplam</th>
-                        <th class="text-right font-semibold pb-1.5">hacim</th>
+                        <th class="text-right font-semibold pb-1.5">total</th>
+                        <th class="text-right font-semibold pb-1.5">volume</th>
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Sodyum</td><td class="text-right">3</td><td class="text-right">5.4</td><td class="text-right text-slate-500">5.4 mL</td></tr>
-                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Potasyum</td><td class="text-right">2</td><td class="text-right">3.6</td><td class="text-right text-slate-500">3.6 mL</td></tr>
-                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Kalsiyum</td><td class="text-right">1.6</td><td class="text-right">2.88</td><td class="text-right text-slate-500">12.8 mL</td></tr>
-                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Magnezyum</td><td class="text-right">0.2</td><td class="text-right">0.36</td><td class="text-right text-slate-500">0.7 mL</td></tr>
-                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Fosfat</td><td class="text-right">1.6</td><td class="text-right">2.88</td><td class="text-right text-slate-500">2.9 mL</td></tr>
-                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Klorür</td><td class="text-right">3</td><td class="text-right">5.4</td><td class="text-right text-slate-500">5.4 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Sodium</td><td class="text-right">3</td><td class="text-right">5.4</td><td class="text-right text-slate-500">5.4 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Potassium</td><td class="text-right">2</td><td class="text-right">3.6</td><td class="text-right text-slate-500">3.6 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Calcium</td><td class="text-right">1.6</td><td class="text-right">2.88</td><td class="text-right text-slate-500">12.8 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Magnesium</td><td class="text-right">0.2</td><td class="text-right">0.36</td><td class="text-right text-slate-500">0.7 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Phosphate</td><td class="text-right">1.6</td><td class="text-right">2.88</td><td class="text-right text-slate-500">2.9 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Chloride</td><td class="text-right">3</td><td class="text-right">5.4</td><td class="text-right text-slate-500">5.4 mL</td></tr>
                     </tbody>
                   </table>
                 </div>
 
-                <!-- additifler -->
+                <!-- additives -->
                 <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Additifler</p>
+                  <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Additives</p>
                   <div class="tnum grid grid-cols-3 gap-2 text-center text-[13px]">
-                    <div class="rounded-xl bg-slate-50 py-2"><p class="text-slate-500">İz element</p><p class="font-semibold">1.8 mL</p></div>
-                    <div class="rounded-xl bg-slate-50 py-2"><p class="text-slate-500">Vitamin</p><p class="font-semibold">1.8 mL</p></div>
-                    <div class="rounded-xl bg-slate-50 py-2"><p class="text-slate-500">Heparin</p><p class="font-semibold text-slate-400">kapalı</p></div>
+                    <div class="rounded-xl bg-slate-50 py-2"><p class="text-slate-500">Trace el.</p><p class="font-semibold">1.8 mL</p></div>
+                    <div class="rounded-xl bg-slate-50 py-2"><p class="text-slate-500">Vitamins</p><p class="font-semibold">1.8 mL</p></div>
+                    <div class="rounded-xl bg-slate-50 py-2"><p class="text-slate-500">Heparin</p><p class="font-semibold text-slate-400">off</p></div>
                   </div>
                 </div>
 
-                <!-- enerji -->
+                <!-- energy -->
                 <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Enerji</p>
+                  <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Energy</p>
                   <div class="mb-3 flex items-baseline gap-2">
                     <span class="numeric text-3xl font-semibold">118.8</span><span class="text-sm text-slate-400">kcal/kg</span>
-                    <span class="tnum ml-auto text-[13px] text-slate-500">toplam 213.8 kcal</span>
+                    <span class="tnum ml-auto text-[13px] text-slate-500">total 213.8 kcal</span>
                   </div>
                   <div class="flex h-3 overflow-hidden rounded-full">
                     <div style="width:54.5%;background:#1d3a6e"></div>
@@ -354,100 +354,100 @@
                     <div style="width:33.7%;background:#c3cfe0"></div>
                   </div>
                   <div class="tnum mt-2 flex justify-between text-[11px] text-slate-500">
-                    <span><span class="font-semibold text-accent-600">KH</span> %54.5</span>
-                    <span><span class="font-semibold" style="color:#5f7aa6">Protein</span> %11.8</span>
-                    <span><span class="font-semibold text-slate-500">Yağ</span> %33.7</span>
+                    <span><span class="font-semibold text-accent-600">Carb</span> 54.5%</span>
+                    <span><span class="font-semibold" style="color:#5f7aa6">Protein</span> 11.8%</span>
+                    <span><span class="font-semibold text-slate-500">Fat</span> 33.7%</span>
                   </div>
                 </div>
 
-                <!-- ozmolarite -->
+                <!-- osmolarity -->
                 <div class="rounded-2xl border-2 border-red-200 bg-red-50 p-4">
                   <div class="flex items-center justify-between">
-                    <p class="font-display text-[13px] font-semibold text-red-700">Ozmolarite</p>
+                    <p class="font-display text-[13px] font-semibold text-red-700">Osmolarity</p>
                     <span class="numeric text-3xl font-semibold text-red-700">1021.5 <span class="font-sans text-sm font-normal">mOsm/L</span></span>
                   </div>
-                  <p class="mt-1 text-xs text-red-500">Periferik hat üst sınırının üzerinde (santral hatta uyarı temizlenir).</p>
+                  <p class="mt-1 text-xs text-red-500">Above the peripheral-line upper limit (clears on a central line).</p>
                 </div>
 
-                <!-- türetilmiş -->
+                <!-- derived -->
                 <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Türetilmiş değerler</p>
+                  <p class="mb-2 font-display text-[13px] font-semibold text-slate-700">Derived values</p>
                   <div class="tnum grid grid-cols-2 gap-y-2 text-[13px]">
-                    <span class="text-slate-500">Aköz hacim</span><span class="text-right font-semibold">234 mL</span>
-                    <span class="text-slate-500">Lipid hacmi</span><span class="text-right font-semibold">36 mL</span>
-                    <span class="text-slate-500">Dekstroz suyu</span><span class="text-right font-semibold">136.6 mL</span>
-                    <span class="text-slate-500">Ca × P çarpımı</span><span class="text-right font-semibold">151.5</span>
+                    <span class="text-slate-500">Aqueous volume</span><span class="text-right font-semibold">234 mL</span>
+                    <span class="text-slate-500">Lipid volume</span><span class="text-right font-semibold">36 mL</span>
+                    <span class="text-slate-500">Dextrose water</span><span class="text-right font-semibold">136.6 mL</span>
+                    <span class="text-slate-500">Ca × P product</span><span class="text-right font-semibold">151.5</span>
                   </div>
                 </div>
 
                 <!-- color key legend -->
                 <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p class="mb-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Uyarı renk anahtarı</p>
+                  <p class="mb-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Warning color key</p>
                   <div class="flex gap-2">
-                    <span class="flex-1 rounded-lg border border-red-200 bg-red-50 px-2 py-1.5 text-center text-[12px] font-semibold text-red-700">kırmızı = hard / blok</span>
-                    <span class="flex-1 rounded-lg border border-amber-200 bg-amber-50 px-2 py-1.5 text-center text-[12px] font-semibold text-amber-700">amber = soft / uyarı</span>
+                    <span class="flex-1 rounded-lg border border-red-200 bg-red-50 px-2 py-1.5 text-center text-[12px] font-semibold text-red-700">red = hard / block</span>
+                    <span class="flex-1 rounded-lg border border-amber-200 bg-amber-50 px-2 py-1.5 text-center text-[12px] font-semibold text-amber-700">amber = soft / caution</span>
                   </div>
                 </div>
 
                 <!-- disclaimer + provenance footer -->
                 <div class="rounded-2xl bg-slate-100 p-4">
                   <p class="text-[12px] leading-relaxed text-slate-500">
-                    Klinik karar-destek aracı · tedaviyi düzenleyen hekim tek sorumludur ·
-                    sonuçları bağımsız doğrulayın.
+                    Clinical decision-support tool · the ordering clinician is solely responsible ·
+                    verify results independently.
                   </p>
                   <button data-go="profile" class="mt-2 text-[12px] font-semibold text-accent-700">
-                    Profil: ESPGHAN 2018 Reference — rehber-temelli referans, merkez-validasyonlu değil ›
+                    Profile: ESPGHAN 2018 Reference — guideline-based, not center-validated ›
                   </button>
                 </div>
               </div>
             </section>
 
-            <!-- ---------- SCREEN 4: PROFİL / PROVENANCE ---------- -->
+            <!-- ---------- SCREEN 4: PROFILE / PROVENANCE ---------- -->
             <section id="profile" class="screen px-6 pb-12 pt-4">
               <div class="mb-4 flex items-center gap-3">
-                <button data-go="input" class="text-sm font-medium text-accent-700">‹ Geri</button>
-                <h2 class="font-display text-xl font-semibold tracking-tight">Etkin profil</h2>
+                <button data-go="input" class="text-sm font-medium text-accent-700">‹ Back</button>
+                <h2 class="font-display text-xl font-semibold tracking-tight">Active profile</h2>
               </div>
 
               <div class="rounded-2xl border border-slate-200 bg-white p-5">
                 <p class="font-display text-xl font-semibold tracking-tight">ESPGHAN 2018 Reference</p>
                 <p class="text-[13px] text-slate-500">preterm &gt;1500 g · NICU</p>
                 <span class="mt-3 inline-block rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[12px] font-semibold text-amber-700">
-                  rehber-temelli referans · merkez-validasyonlu değil
+                  guideline-based reference · not center-validated
                 </span>
                 <div class="tnum mt-4 grid grid-cols-2 gap-y-2 border-t border-slate-100 pt-4 text-[13px]">
-                  <span class="text-slate-500">Sürüm</span><span class="text-right font-semibold">0.1.0</span>
-                  <span class="text-slate-500">Son inceleme</span><span class="text-right font-semibold">2026-06-16</span>
-                  <span class="text-slate-500">İnceleyen</span><span class="text-right font-semibold text-[12px]">Sahin Parlak</span>
+                  <span class="text-slate-500">Version</span><span class="text-right font-semibold">0.1.0</span>
+                  <span class="text-slate-500">Last reviewed</span><span class="text-right font-semibold">2026-06-16</span>
+                  <span class="text-slate-500">Reviewed by</span><span class="text-right font-semibold text-[12px]">Sahin Parlak</span>
                 </div>
               </div>
 
-              <p class="mt-5 mb-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Dozlama — rehbere izlenebilir</p>
+              <p class="mt-5 mb-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Dosing — guideline-traceable</p>
               <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white">
                 <table class="tnum w-full text-[12.5px]">
                   <tbody class="divide-y divide-slate-100">
-                    <tr><td class="px-3 py-2 text-slate-600">GIR (başla/ilerlet/maks)</td><td class="px-3 py-2 text-right font-semibold">4 / 2 / 12</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 5.4</td></tr>
-                    <tr><td class="px-3 py-2 text-slate-600">Amino asit (g/kg)</td><td class="px-3 py-2 text-right font-semibold">1.5 → 3.5</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 3.1–3.3</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">GIR (start/advance/max)</td><td class="px-3 py-2 text-right font-semibold">4 / 2 / 12</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 5.4</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Amino acid (g/kg)</td><td class="px-3 py-2 text-right font-semibold">1.5 → 3.5</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 3.1–3.3</td></tr>
                     <tr><td class="px-3 py-2 text-slate-600">Lipid (g/kg)</td><td class="px-3 py-2 text-right font-semibold">1.0 → 4.0</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 4.2–4.3</td></tr>
-                    <tr><td class="px-3 py-2 text-slate-600">Sıvı (mL/kg)</td><td class="px-3 py-2 text-right font-semibold">70 → 150</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">Jochum'18</td></tr>
-                    <tr><td class="px-3 py-2 text-slate-600">Enerji hedef</td><td class="px-3 py-2 text-right font-semibold">90–120</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 2.6</td></tr>
-                    <tr><td class="px-3 py-2 text-slate-600">Na / K / Cl</td><td class="px-3 py-2 text-right font-semibold">3 / 2 / 3</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">Tablo 3</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Fluid (mL/kg)</td><td class="px-3 py-2 text-right font-semibold">70 → 150</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">Jochum'18</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Energy target</td><td class="px-3 py-2 text-right font-semibold">90–120</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 2.6</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Na / K / Cl</td><td class="px-3 py-2 text-right font-semibold">3 / 2 / 3</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">Table 3</td></tr>
                     <tr><td class="px-3 py-2 text-slate-600">Ca / P / Mg</td><td class="px-3 py-2 text-right font-semibold">1.6 / 1.6 / 0.2</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 8.9</td></tr>
                   </tbody>
                 </table>
               </div>
 
               <div class="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
-                <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Temsilî değerler</p>
+                <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Representative values</p>
                 <p class="mt-1 text-[13px] leading-relaxed text-slate-600">
-                  Dekstroz % sınırları, stok konsantrasyonları ve ürün bilgileri rehberde tek sayı
-                  olarak verilmez — fizikokimyasal yaklaşım / eczane gerçeğidir. Her merkez bunları
-                  değiştirip <b>validasyon</b> yapmalıdır.
+                  Dextrose % limits, stock concentrations and product details aren't single numbers
+                  in the guideline — they're physicochemical approximations / pharmacy facts. Each
+                  center must replace and <b>validate</b> them.
                 </p>
               </div>
 
               <p class="mt-4 text-center text-[12px] text-slate-400">
-                Tam kaynak listesi: <code class="rounded bg-slate-200/70 px-1">espghan-2018-reference.sources.md</code>
+                Full source list: <code class="rounded bg-slate-200/70 px-1">espghan-2018-reference.sources.md</code>
               </p>
             </section>
           </div>
@@ -457,32 +457,32 @@
             <div id="termsBackdrop" class="absolute inset-0 bg-black/40"></div>
             <div class="absolute inset-x-0 bottom-0 overflow-hidden rounded-t-[28px] bg-white">
               <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4">
-                <p class="text-[15px] font-bold">Kullanım koşulları</p>
-                <button id="termsClose" class="text-sm font-semibold text-accent-700">Kapat</button>
+                <p class="text-[15px] font-bold">Terms of use</p>
+                <button id="termsClose" class="text-sm font-semibold text-accent-700">Close</button>
               </div>
               <div class="phone-scroll max-h-[600px] space-y-4 overflow-y-auto px-5 py-4 text-[13px] leading-relaxed text-slate-600">
                 <div>
-                  <p class="font-semibold text-ink">Amaç</p>
-                  <p>Araştırma ve eğitim amaçlı, nitelikli sağlık profesyonelleri için bir karar desteğidir; profesyonel yargının yerini almaz. Motor hiçbir klinik sabit içermez — sonuç, kullanıcının sağladığı profili ve girdisini yansıtır.</p>
+                  <p class="font-semibold text-ink">Purpose</p>
+                  <p>An informational and educational decision-support tool for qualified healthcare professionals; it does not replace professional judgment. The engine contains no clinical constants — a result reflects the user's profile and input.</p>
                 </div>
                 <div>
-                  <p class="font-semibold text-ink">Garanti yok</p>
-                  <p>Yazılım "olduğu gibi" sunulur; doğruluk, eksiksizlik ve belirli amaca uygunluk dâhil hiçbir garanti verilmez (LICENSE).</p>
+                  <p class="font-semibold text-ink">No warranty</p>
+                  <p>The software is provided "as is"; no warranty is given, including accuracy, completeness, or fitness for a particular purpose (LICENSE).</p>
                 </div>
                 <div>
-                  <p class="font-semibold text-ink">Risk ve sorumluluk kullanıcıda</p>
-                  <p>Kullanım tamamen kullanıcının riskindedir. Profili doğrulamak, her sonucu bağımsız kontrol etmek ve tüm klinik kararlar/istemler kullanıcının sorumluluğundadır.</p>
+                  <p class="font-semibold text-ink">Risk &amp; responsibility on you</p>
+                  <p>Use is entirely at the user's own risk. Verifying the profile, independently checking every result, and all clinical decisions and orders are the user's responsibility.</p>
                 </div>
                 <div>
-                  <p class="font-semibold text-ink">Sorumluluğun sınırı & tazminat</p>
-                  <p>Yürürlükteki hukukun izin verdiği azami ölçüde yazarlar oluşabilecek zararlardan sorumlu değildir; kullanıcı, kullanımından doğan taleplere karşı yazarları beri tutar.</p>
+                  <p class="font-semibold text-ink">Limitation of liability &amp; indemnity</p>
+                  <p>To the maximum extent permitted by law, the authors are not liable for any damages; the user holds the authors harmless against claims arising from their use.</p>
                 </div>
                 <div>
-                  <p class="font-semibold text-ink">Düzenleyici durum</p>
-                  <p>Hiçbir otoritece (FDA, AB MDR, TİTCK) tıbbi cihaz olarak onaylı/kayıtlı değildir. Sınıflandırma, kullananın verdiği amaca bağlıdır ve bu sorumluluk kullanıcıya aittir.</p>
+                  <p class="font-semibold text-ink">Regulatory status</p>
+                  <p>Not approved or registered as a medical device by any authority (FDA, EU MDR, TİTCK). Classification depends on the intended use given by the user, who is responsible for it.</p>
                 </div>
                 <p class="text-[11px] text-slate-400">
-                  Tam metin: <code class="rounded bg-slate-200/70 px-1">DISCLAIMER.md</code> · bu özet hukuki tavsiye değildir.
+                  Full text: <code class="rounded bg-slate-200/70 px-1">DISCLAIMER.md</code> · this summary is not legal advice.
                 </p>
               </div>
             </div>
@@ -495,7 +495,7 @@
     </main>
 
     <p class="pb-10 text-center text-xs text-slate-400">
-      Tıklanabilir prototip · NativeWind ≈ Tailwind olduğundan bu sınıflar RN'e neredeyse birebir taşınır.
+      Clickable prototype · since NativeWind ≈ Tailwind, these classes carry over to RN almost 1:1.
     </p>
 
     <script>
