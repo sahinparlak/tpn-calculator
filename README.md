@@ -24,9 +24,14 @@ error-prone, and **different at every center** — different dose schedules, lim
 product concentrations, and units. Most calculators bake one institution's
 protocol into the code.
 
-This project flips that: a **pure, tested calculation engine** plus a
-**per-center configuration profile**. The same engine powers every center; only
-the profile changes.
+I'm a pediatric surgery resident, and TPN is part of my daily clinical routine —
+exactly the kind of repetitive, high-stakes calculation that deserves better,
+safer tooling. This project grew out of that need.
+
+So it flips the usual approach: instead of hardcoding one hospital's protocol, it
+pairs a **pure, tested calculation engine** with a **per-center configuration
+profile**. The same engine powers every center; only the profile changes — and
+it's **free under MIT**, so any unit can adapt it to their own protocol.
 
 ## Architecture
 
