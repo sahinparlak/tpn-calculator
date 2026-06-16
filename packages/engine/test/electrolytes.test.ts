@@ -5,14 +5,7 @@ import { cloneProfile, syntheticProfile } from './fixtures/synthetic.profile.js'
 describe('computeElectrolytes', () => {
   it('returns all six electrolytes in order', () => {
     const result = computeElectrolytes(syntheticProfile.electrolytes, 2);
-    expect(result.map((e) => e.key)).toEqual([
-      'sodium',
-      'potassium',
-      'calcium',
-      'magnesium',
-      'phosphate',
-      'chloride',
-    ]);
+    expect(result.map((e) => e.key)).toEqual(['sodium', 'potassium', 'calcium', 'magnesium', 'phosphate', 'chloride']);
   });
 
   it('computes total dose and stock volume', () => {

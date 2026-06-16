@@ -59,8 +59,7 @@ export function calculateTPN(patient: PatientInput, profile: TPNProfile): TPNRes
   });
 
   // Calcium–phosphate solubility product, as concentrations in the admixture
-  const totalDoseOf = (key: 'calcium' | 'phosphate'): number =>
-    electrolytes.find((e) => e.key === key)?.totalDose ?? 0;
+  const totalDoseOf = (key: 'calcium' | 'phosphate'): number => electrolytes.find((e) => e.key === key)?.totalDose ?? 0;
   const aqueousLitres = aqueousVolumeMl / 1000;
   const caPhosphateProduct =
     aqueousLitres > 0 ? (totalDoseOf('calcium') / aqueousLitres) * (totalDoseOf('phosphate') / aqueousLitres) : 0;

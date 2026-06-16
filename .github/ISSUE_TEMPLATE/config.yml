@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Clinical-safety or security report
+    url: https://github.com/sahinparlak/tpn-calculator/security/advisories/new
+    about: Incorrect/unsafe calculations and security issues — report privately, not as a public issue (see SECURITY.md).

@@ -47,7 +47,7 @@ describe('assertProfileFilled', () => {
 
   it('ignores helper keys prefixed with underscore', () => {
     const profile = cloneProfile() as Record<string, unknown>;
-    profile['_note'] = 'FILL_ME later';
+    profile._note = 'FILL_ME later';
     expect(() => assertProfileFilled(profile as never)).not.toThrow();
   });
 });

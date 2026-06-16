@@ -16,10 +16,7 @@ describe('computeFluid', () => {
   });
 
   it('adds phototherapy and radiant-warmer adjustments', () => {
-    const f = computeFluid(
-      { ...base, ageDays: 5, phototherapy: true, radiantWarmer: true },
-      syntheticProfile,
-    );
+    const f = computeFluid({ ...base, ageDays: 5, phototherapy: true, radiantWarmer: true }, syntheticProfile);
     expect(f.prescribedMlPerKg).toBe(180); // 150 + 10 + 20
     expect(f.totalVolumeMl).toBe(360);
   });

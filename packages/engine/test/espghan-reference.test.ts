@@ -27,17 +27,20 @@ describe('ESPGHAN reference — dosing trajectory by day of life', () => {
     { day: 6, gir: 12, aa: 3.5, lipid: 4, fluidMlPerKg: 150 },
   ] as const;
 
-  it.each(trajectory)(
-    'day $day → GIR $gir, AA $aa g/kg, lipid $lipid g/kg, fluid $fluidMlPerKg ml/kg',
-    ({ day, gir, aa, lipid, fluidMlPerKg }) => {
-      const patient: PatientInput = { weightKg: 1.8, ageDays: day, line: 'central' };
-      const r = calculateTPN(patient, profile);
-      expect(r.glucose.gir).toBe(gir);
-      expect(r.aminoAcid.gPerKg).toBe(aa);
-      expect(r.lipid.gPerKg).toBe(lipid);
-      expect(r.derived.prescribedMlPerKg).toBe(fluidMlPerKg);
-    },
-  );
+  it.each(trajectory)('day $day → GIR $gir, AA $aa g/kg, lipid $lipid g/kg, fluid $fluidMlPerKg ml/kg', ({
+    day,
+    gir,
+    aa,
+    lipid,
+    fluidMlPerKg,
+  }) => {
+    const patient: PatientInput = { weightKg: 1.8, ageDays: day, line: 'central' };
+    const r = calculateTPN(patient, profile);
+    expect(r.glucose.gir).toBe(gir);
+    expect(r.aminoAcid.gPerKg).toBe(aa);
+    expect(r.lipid.gPerKg).toBe(lipid);
+    expect(r.derived.prescribedMlPerKg).toBe(fluidMlPerKg);
+  });
 });
 
 describe('ESPGHAN reference — guideline-derived doses meet the guideline energy target', () => {
@@ -64,9 +67,7 @@ describe('ESPGHAN reference — line safety', () => {
     const r = calculateTPN({ ...day5, line: 'peripheral' }, profile);
     expect(r.osmolarityMOsmPerL).toBeGreaterThan(900);
     expect(r.glucose.finalConcentrationPct).toBeGreaterThan(profile.glucose.maxConcPeripheral);
-    expect(ids(r.warnings)).toEqual(
-      expect.arrayContaining(['osmolarity-peripheral', 'dextrose-peripheral-max']),
-    );
+    expect(ids(r.warnings)).toEqual(expect.arrayContaining(['osmolarity-peripheral', 'dextrose-peripheral-max']));
     expect(r.warnings.every((w) => w.level === 'hard')).toBe(true);
   });
 });

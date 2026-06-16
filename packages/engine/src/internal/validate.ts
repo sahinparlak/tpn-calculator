@@ -53,7 +53,9 @@ export function assertProfileFilled(profile: TPNProfile): void {
       return;
     }
     if (Array.isArray(value)) {
-      value.forEach((item, i) => visit(item, `${path}[${i}]`, key));
+      value.forEach((item, i) => {
+        visit(item, `${path}[${i}]`, key);
+      });
       return;
     }
     if (typeof value === 'object') {
