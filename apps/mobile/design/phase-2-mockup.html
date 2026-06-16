@@ -3,31 +3,48 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TPN Hesaplayıcı — Faz 2 Mockup (Sakin klinik)</title>
+    <title>TPN Hesaplayıcı — Faz 2 Mockup (Modern Editöryel)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
       rel="stylesheet"
     />
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              display: ['Fraunces', 'Georgia', 'serif'],
+              numeric: ['Fraunces', 'Georgia', 'serif'],
+            },
             colors: {
-              // Calm clinical palette — neutral light ground + single teal accent.
-              ground: '#f5f6f8',
-              ink: '#0f172a',
-              accent: { 50: '#f0fdfa', 100: '#ccfbf1', 600: '#0d9488', 700: '#0f766e' },
+              // Direction C — Modern Editöryel: warm off-white ground, petrol accent,
+              // warm near-black ink. `slate` is repointed to warm greys so the whole
+              // mockup shifts cool→warm in one move.
+              ground: '#f7f6f3',
+              ink: '#14110e',
+              accent: { 50: '#eef3f2', 100: '#d9e6e4', 600: '#0b6e6e', 700: '#0b3b3b' },
+              slate: {
+                50: '#faf9f7',
+                100: '#f1efea',
+                200: '#e7e3da',
+                300: '#d6d1c6',
+                400: '#9a9488',
+                500: '#7c766b',
+                600: '#5c574e',
+                700: '#423e37',
+                900: '#14110e',
+              },
             },
           },
         },
       };
     </script>
     <style>
-      body { background: #e9ebef; }
+      body { background: #ded9cf; }
       .tnum { font-variant-numeric: tabular-nums; }
       .screen:not(.active) { display: none; }
       .phone-scroll::-webkit-scrollbar { width: 0; height: 0; }
@@ -39,8 +56,8 @@
     <header class="mx-auto max-w-2xl px-5 pt-8 pb-2 text-center">
       <h1 class="text-xl font-semibold">TPN Hesaplayıcı — Faz 2 mockup</h1>
       <p class="mt-1 text-sm text-slate-500">
-        Stil: <span class="font-medium text-slate-700">Sakin klinik (açık)</span> ·
-        tek vurgu teal · güvenlik renkleri sabit (kırmızı = hard, amber = soft)
+        Stil: <span class="font-medium text-slate-700">Modern Editöryel</span> ·
+        Fraunces serif başlık · petrol vurgu · güvenlik renkleri sabit (kırmızı = hard, amber = soft)
       </p>
       <p class="mt-1 text-xs text-slate-400">
         Sayılar gerçek <code class="rounded bg-slate-200/70 px-1">@tpn/engine</code> çıktısıdır
@@ -75,7 +92,7 @@
               </div>
 
               <div class="flex-1">
-                <h2 class="text-[26px] font-bold leading-tight tracking-tight">Başlamadan önce</h2>
+                <h2 class="font-display text-[28px] font-semibold leading-tight tracking-tight">Başlamadan önce</h2>
                 <p class="mt-3 text-[16px] leading-relaxed text-slate-600">
                   TPN Hesaplayıcı bir klinisyen tarafından geliştirildi. Hesapları güncel klinik
                   kılavuza dayanır, her değer <span class="font-semibold text-ink">kaynağına
