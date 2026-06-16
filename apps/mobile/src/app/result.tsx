@@ -158,7 +158,7 @@ export default function ResultScreen() {
           <KV k={s.result.gir} v={`${r1(result.glucose.gir)} mg/kg/min`} />
           <KV k={s.result.finalDextrose} v={`${r1(result.glucose.finalConcentrationPct)}%`} />
           <KV k={s.result.amount} v={`${r1(num(result.glucose.detail?.glucoseGrams))} g`} />
-          <KV k={s.result.volume} v={`${r1(result.glucose.volumeMl)} mL`} />
+          <KV k={s.result.dextroseVolume} v={`${r1(result.glucose.volumeMl)} mL`} />
         </Card>
 
         {/* amino acid + lipid */}
@@ -279,7 +279,6 @@ export default function ResultScreen() {
           <CardTitle>{s.result.derived}</CardTitle>
           <KV k={s.result.aqueousVolume} v={`${r1(result.derived.aqueousVolumeMl)} mL`} />
           <KV k={s.result.lipidVolume} v={`${r1(result.derived.lipidVolumeMl)} mL`} />
-          <KV k={s.result.dextroseWater} v={`${r1(result.derived.dextroseWaterMl)} mL`} />
           <KV k={s.result.caPProduct} v={r1(result.derived.caPhosphateProduct)} />
         </Card>
 
