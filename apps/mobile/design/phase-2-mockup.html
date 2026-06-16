@@ -29,8 +29,7 @@
     <style>
       body { background: #e9ebef; }
       .tnum { font-variant-numeric: tabular-nums; }
-      .screen { display: none; }
-      .screen.active { display: block; }
+      .screen:not(.active) { display: none; }
       .phone-scroll::-webkit-scrollbar { width: 0; height: 0; }
       .phone-scroll { scrollbar-width: none; }
     </style>
@@ -69,64 +68,57 @@
 
           <div class="phone-scroll h-[778px] overflow-y-auto">
             <!-- ---------- SCREEN 1: DISCLAIMER ---------- -->
-            <section id="disclaimer" class="screen active px-6 pb-10 pt-6">
-              <div class="mb-6 flex items-center gap-2">
+            <section id="disclaimer" class="screen active flex min-h-full flex-col px-6 pb-8 pt-8">
+              <div class="mb-10 flex items-center gap-2">
                 <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-accent-600 text-sm font-bold text-white">T</div>
                 <span class="text-sm font-semibold tracking-tight text-slate-700">TPN Hesaplayıcı</span>
               </div>
 
-              <h2 class="text-2xl font-bold tracking-tight">Klinik sorumluluk</h2>
-              <p class="mt-2 text-[15px] leading-relaxed text-slate-600">
-                Bu yazılım bir <span class="font-semibold text-ink">klinik karar-destek aracıdır</span> —
-                tıbbi cihaz değildir ve profesyonel tıbbi muhakemenin yerini tutmaz.
-              </p>
-
-              <ul class="mt-5 space-y-3">
-                <li class="flex gap-3 text-[14px] leading-relaxed text-slate-700">
-                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600"></span>
-                  Tüm hesaplar kullanıcı tarafından sağlanan <b>merkez-özel profil</b> temellidir;
-                  doğruluk hem profile hem girilen veriye bağlıdır.
-                </li>
-                <li class="flex gap-3 text-[14px] leading-relaxed text-slate-700">
-                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600"></span>
-                  Yazılım, profilin güncel / güvenli / yerel onaylı olduğunu <b>doğrulamaz</b>.
-                </li>
-                <li class="flex gap-3 text-[14px] leading-relaxed text-slate-700">
-                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600"></span>
-                  Reçeteyi yazan klinisyen <b>tam ve tek sorumludur</b>. Sonuçları klinik
-                  kullanımdan önce daima bağımsız olarak doğrulayın.
-                </li>
-                <li class="flex gap-3 text-[14px] leading-relaxed text-slate-700">
-                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600"></span>
-                  Yazarlar ve katkıcılar oluşabilecek zarardan <b>sorumluluk kabul etmez</b> (LICENSE).
-                </li>
-              </ul>
-
-              <div class="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4">
-                <p class="text-[13px] font-medium leading-relaxed text-amber-800">
-                  Etkin profil <b>ESPGHAN 2018 Reference</b> — rehber-temelli referanstır,
-                  merkez-validasyonlu değildir. Olduğu gibi klinik kullanıma uygun değildir.
+              <div class="flex-1">
+                <h2 class="text-[26px] font-bold leading-tight tracking-tight">Başlamadan önce</h2>
+                <p class="mt-3 text-[16px] leading-relaxed text-slate-600">
+                  Bu, nitelikli sağlık profesyonelleri için
+                  <span class="font-semibold text-ink">araştırma ve eğitim amaçlı</span> bir karar
+                  desteğidir; tek başına klinik kullanım için değildir. Sonuçları
+                  <span class="font-semibold text-ink">her zaman bağımsız doğrulayın</span> —
+                  veriyi giren ve kullanan hekim tüm sorumluluğu üstlenir.
                 </p>
+
+                <div class="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3.5">
+                  <p class="text-[14px] leading-relaxed text-amber-800">
+                    Etkin profil rehber-temellidir, <b>merkez-validasyonlu değildir</b>.
+                  </p>
+                </div>
+
+                <button id="moreBtn" class="mt-5 text-[13px] font-medium text-accent-700">
+                  Tüm koşulları oku ›
+                </button>
+                <ul id="moreText" class="mt-3 hidden list-disc space-y-2 pl-5 text-[13px] leading-relaxed text-slate-500 marker:text-slate-300">
+                  <li>Hesaplar kullanıcının sağladığı merkez-özel profile ve girilen veriye dayanır; motor hiçbir klinik sabit içermez — sonuç sizin yapılandırmanızı yansıtır.</li>
+                  <li>Yazılım "olduğu gibi" sunulur; doğruluk dâhil hiçbir garanti verilmez (LICENSE).</li>
+                  <li>Kullanım tamamen kullanıcının riskindedir; her sonucu doğrulamak ve tüm klinik kararlar kullanıcının sorumluluğundadır.</li>
+                  <li>Hiçbir düzenleyici otoritece tıbbi cihaz olarak onaylı/kayıtlı değildir.</li>
+                  <li class="font-medium text-slate-600">Tam metin: <code class="rounded bg-slate-200/70 px-1">DISCLAIMER.md</code></li>
+                </ul>
               </div>
 
-              <label class="mt-6 flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4">
-                <input id="consent" type="checkbox" class="mt-0.5 h-5 w-5 accent-accent-600" />
-                <span class="text-[14px] font-medium text-slate-700">
-                  Yukarıdaki şartları okudum ve kabul ediyorum.
-                </span>
-              </label>
-
-              <button
-                id="acceptBtn"
-                data-go="input"
-                disabled
-                class="mt-4 w-full rounded-2xl bg-accent-600 py-4 text-[15px] font-semibold text-white shadow-sm transition disabled:cursor-not-allowed disabled:bg-slate-300"
-              >
-                Anladım, kabul ediyorum
-              </button>
-              <p class="mt-3 text-center text-xs text-slate-400">
-                Onay bir kez alınır ve cihazda saklanır · disclaimer Sonuç ekranında görünür kalır
-              </p>
+              <div class="mt-8">
+                <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3.5">
+                  <input id="consent" type="checkbox" class="mt-0.5 h-5 w-5 shrink-0 accent-accent-600" />
+                  <span class="text-[14px] font-medium leading-snug text-slate-700">Nitelikli bir hekim olduğumu, koşulları okuduğumu ve sorumluluğu üstlendiğimi kabul ediyorum</span>
+                </label>
+                <button
+                  id="acceptBtn"
+                  data-go="input"
+                  disabled
+                  class="mt-3 w-full rounded-2xl bg-accent-600 py-4 text-[15px] font-semibold text-white shadow-sm transition disabled:cursor-not-allowed disabled:bg-slate-300"
+                >
+                  Devam et
+                </button>
+                <p class="mt-3 text-center text-xs text-slate-400">
+                  Onay bir kez alınır · disclaimer Sonuç ekranında görünür kalır
+                </p>
+              </div>
             </section>
 
             <!-- ---------- SCREEN 2: HASTA GİRİŞİ ---------- -->
@@ -381,7 +373,7 @@
                 <!-- disclaimer + provenance footer -->
                 <div class="rounded-2xl bg-slate-100 p-4">
                   <p class="text-[12px] leading-relaxed text-slate-500">
-                    Klinik karar-destek aracı · reçeteyi yazan klinisyen tek sorumludur ·
+                    Klinik karar-destek aracı · tedaviyi düzenleyen hekim tek sorumludur ·
                     sonuçları bağımsız doğrulayın.
                   </p>
                   <button data-go="profile" class="mt-2 text-[12px] font-semibold text-accent-700">
@@ -511,6 +503,14 @@
       document.getElementById('errToggle').addEventListener('click', () =>
         document.getElementById('errExample').classList.toggle('hidden'),
       );
+      // disclaimer "read full text" toggle
+      document.getElementById('moreBtn').addEventListener('click', (e) => {
+        const box = document.getElementById('moreText');
+        box.classList.toggle('hidden');
+        e.target.textContent = box.classList.contains('hidden')
+          ? 'Tüm klinik metni oku ›'
+          : 'Tüm klinik metni gizle ‹';
+      });
       // init
       show('disclaimer');
       paintSeg('.seg-in', 'line', 'central');
