@@ -1,9 +1,9 @@
-// Metro config for the TPN monorepo (Expo + npm workspaces).
-// Follows the official Expo monorepo guide so Metro can resolve the
-// workspace package `@tpn/engine` (built to its own `dist/`) via the
-// hoisted symlink at the repo root.
+// Metro config for the TPN monorepo (Expo + npm workspaces) with NativeWind.
+// Follows the official Expo monorepo guide so Metro can resolve the workspace
+// package `@tpn/engine` (built to its own `dist/`) via the hoisted symlink.
 // https://docs.expo.dev/guides/monorepos/
 const { getDefaultConfig } = require('expo/metro-config');
+const { withNativeWind } = require('nativewind/metro');
 const path = require('node:path');
 
 const projectRoot = __dirname;
@@ -20,4 +20,4 @@ config.resolver.nodeModulesPaths = [
   path.resolve(workspaceRoot, 'node_modules'),
 ];
 
-module.exports = config;
+module.exports = withNativeWind(config, { input: './src/global.css' });
