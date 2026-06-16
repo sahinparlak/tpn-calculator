@@ -5,19 +5,35 @@ release. Grouped by priority. Items here feed the roadmap in [`PLAN.md`](./PLAN.
 
 ## A. Clinical safety & validation — highest priority
 
-- [ ] **Clinical validation dataset.** Reference cases with **source-traceable**
-      expected outputs, run as regression tests. The current suite tests against a
-      *synthetic* profile only (`test/fixtures/synthetic.profile.ts`), not against
-      clinically known-correct cases. This is the single biggest blocker to
-      "ready". (Promised in `PLAN.md` §5.)
-- [ ] **One filled, clinically-reviewed profile** (e.g. Erciyes NICU) so the tool's
-      real output is demonstrable — today only the blank template exists.
+- [x] **Clinical validation dataset.** Source-traceable regression tests added in
+      `test/espghan-reference.test.ts` (dosing trajectory by day of life, energy
+      target, line safety) against the ESPGHAN 2018 reference profile.
+- [x] **A filled reference profile.** Guideline-derived reference done:
+      `profiles/espghan-2018-reference.json` (+ `test/fixtures/espghan-reference.profile.ts`).
+      A **center-validated** profile (e.g. a real Erciyes NICU protocol) is still pending.
 - [ ] **Surface modeling caveats** for clinician review: Ca–P solubility-product is
       an approximation (not a curve), additive dose modeled as ml/kg, lipid drawn
       separately from the volume budget. Documented in `PLAN.md`/`PROFILE.md`; make
       them easy to find from output/README.
-- [ ] **Cite the scientific basis** of the formulas and default reference values
-      (see "Scientific sources" decision once finalized).
+- [x] **Cite the scientific basis** of the formulas and default reference values:
+      `docs/REFERENCES.md` + `profiles/espghan-2018-reference.sources.md`.
+
+### A.1 Engine/schema modeling gaps (surfaced while sourcing ESPGHAN 2018)
+
+- [ ] **Phototherapy / radiant-warmer adjustment unit mismatch.** ESPGHAN expresses
+      phototherapy as a **percentage** increase (+10–20%), but the schema field
+      `fluid.phototherapyAdjMlPerKg` (and the radiant-warmer field) is an **absolute
+      ml/kg** value. Either convert per profile, or make the field percentage-based.
+- [ ] **Fluid schedule has no weight-band dimension.** ESPGHAN fluid intake varies
+      by birth-weight band (term / >1500 g / 1000–1500 g / <1000 g); the schema's
+      `fluid.schedulePerKg` is keyed on day of life only. The reference profile fixes
+      one band (preterm >1500 g); a future schema may need a weight-band axis.
+- [ ] **Ca–P safety model vs guideline.** The engine models Ca–P risk as a
+      solubility product (Ca×P > threshold), but ESPGHAN (Mihatsch 2018) expresses it
+      as a molar **Ca:P ratio** (0.8–1.0 early, ~1.3 stable growth) plus
+      pharmacy-tested physical compatibility (R 8.7) — it gives **no numeric product
+      threshold**. Consider adding a molar Ca:P-ratio safety rule (guideline-traceable)
+      and keep `caPhosphate.maxSolubilityProduct` as a pharmacy/product value.
 
 ## B. Engineering maturity / OSS showcase
 
