@@ -279,7 +279,8 @@ export default function ResultScreen() {
           <CardTitle>{s.result.derived}</CardTitle>
           <KV k={s.result.aqueousVolume} v={`${r1(result.derived.aqueousVolumeMl)} mL`} />
           <KV k={s.result.lipidVolume} v={`${r1(result.derived.lipidVolumeMl)} mL`} />
-          <KV k={s.result.caPProduct} v={r1(result.derived.caPhosphateProduct)} />
+          <KV k={s.result.caPProduct} v={`${r1(result.derived.caPhosphateProduct)} (mmol/L)²`} />
+          <Text className="mt-1 font-inter text-[11px] leading-relaxed text-slate-400">{s.result.caPProductNote}</Text>
         </Card>
 
         {/* color key */}
