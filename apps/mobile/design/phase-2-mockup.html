@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TPN Hesaplayıcı — Faz 2 Mockup (Sakin klinik)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+            colors: {
+              // Calm clinical palette — neutral light ground + single teal accent.
+              ground: '#f5f6f8',
+              ink: '#0f172a',
+              accent: { 50: '#f0fdfa', 100: '#ccfbf1', 600: '#0d9488', 700: '#0f766e' },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body { background: #e9ebef; }
+      .tnum { font-variant-numeric: tabular-nums; }
+      .screen { display: none; }
+      .screen.active { display: block; }
+      .phone-scroll::-webkit-scrollbar { width: 0; height: 0; }
+      .phone-scroll { scrollbar-width: none; }
+    </style>
+  </head>
+  <body class="font-sans text-ink antialiased">
+    <!-- ===================== Review chrome ===================== -->
+    <header class="mx-auto max-w-2xl px-5 pt-8 pb-2 text-center">
+      <h1 class="text-xl font-semibold">TPN Hesaplayıcı — Faz 2 mockup</h1>
+      <p class="mt-1 text-sm text-slate-500">
+        Stil: <span class="font-medium text-slate-700">Sakin klinik (açık)</span> ·
+        tek vurgu teal · güvenlik renkleri sabit (kırmızı = hard, amber = soft)
+      </p>
+      <p class="mt-1 text-xs text-slate-400">
+        Sayılar gerçek <code class="rounded bg-slate-200/70 px-1">@tpn/engine</code> çıktısıdır
+        (preterm 1.8 kg · gün 5). Aşağıdaki butonlarla ekranlar arası gezin.
+      </p>
+
+      <!-- Screen rail -->
+      <nav class="mt-4 inline-flex flex-wrap justify-center gap-1.5 rounded-2xl bg-white p-1.5 shadow-sm ring-1 ring-slate-200">
+        <button data-go="disclaimer" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">1 · Disclaimer</button>
+        <button data-go="input" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">2 · Hasta girişi</button>
+        <button data-go="results" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">3 · Sonuç</button>
+        <button data-go="profile" class="rail-btn rounded-xl px-3 py-1.5 text-sm font-medium">4 · Profil</button>
+      </nav>
+    </header>
+
+    <!-- ===================== Phone ===================== -->
+    <main class="flex justify-center px-4 py-6">
+      <div class="relative w-[390px] overflow-hidden rounded-[44px] bg-black p-[6px] shadow-2xl">
+        <div class="relative h-[820px] overflow-hidden rounded-[38px] bg-ground">
+          <!-- status bar -->
+          <div class="flex items-center justify-between px-7 pt-3 pb-1 text-[13px] font-semibold text-ink">
+            <span class="tnum">9:41</span>
+            <span class="text-xs">●●● 🔋</span>
+          </div>
+
+          <div class="phone-scroll h-[778px] overflow-y-auto">
+            <!-- ---------- SCREEN 1: DISCLAIMER ---------- -->
+            <section id="disclaimer" class="screen active px-6 pb-10 pt-6">
+              <div class="mb-6 flex items-center gap-2">
+                <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-accent-600 text-sm font-bold text-white">T</div>
+                <span class="text-sm font-semibold tracking-tight text-slate-700">TPN Hesaplayıcı</span>
+              </div>
+
+              <h2 class="text-2xl font-bold tracking-tight">Klinik sorumluluk</h2>
+              <p class="mt-2 text-[15px] leading-relaxed text-slate-600">
+                Bu yazılım bir <span class="font-semibold text-ink">klinik karar-destek aracıdır</span> —
+                tıbbi cihaz değildir ve profesyonel tıbbi muhakemenin yerini tutmaz.
+              </p>
+
+              <ul class="mt-5 space-y-3">
+                <li class="flex gap-3 text-[14px] leading-relaxed text-slate-700">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600"></span>
+                  Tüm hesaplar kullanıcı tarafından sağlanan <b>merkez-özel profil</b> temellidir;
+                  doğruluk hem profile hem girilen veriye bağlıdır.
+                </li>
+                <li class="flex gap-3 text-[14px] leading-relaxed text-slate-700">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600"></span>
+                  Yazılım, profilin güncel / güvenli / yerel onaylı olduğunu <b>doğrulamaz</b>.
+                </li>
+                <li class="flex gap-3 text-[14px] leading-relaxed text-slate-700">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600"></span>
+                  Reçeteyi yazan klinisyen <b>tam ve tek sorumludur</b>. Sonuçları klinik
+                  kullanımdan önce daima bağımsız olarak doğrulayın.
+                </li>
+                <li class="flex gap-3 text-[14px] leading-relaxed text-slate-700">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600"></span>
+                  Yazarlar ve katkıcılar oluşabilecek zarardan <b>sorumluluk kabul etmez</b> (LICENSE).
+                </li>
+              </ul>
+
+              <div class="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4">
+                <p class="text-[13px] font-medium leading-relaxed text-amber-800">
+                  Etkin profil <b>ESPGHAN 2018 Reference</b> — rehber-temelli referanstır,
+                  merkez-validasyonlu değildir. Olduğu gibi klinik kullanıma uygun değildir.
+                </p>
+              </div>
+
+              <label class="mt-6 flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+                <input id="consent" type="checkbox" class="mt-0.5 h-5 w-5 accent-accent-600" />
+                <span class="text-[14px] font-medium text-slate-700">
+                  Yukarıdaki şartları okudum ve kabul ediyorum.
+                </span>
+              </label>
+
+              <button
+                id="acceptBtn"
+                data-go="input"
+                disabled
+                class="mt-4 w-full rounded-2xl bg-accent-600 py-4 text-[15px] font-semibold text-white shadow-sm transition disabled:cursor-not-allowed disabled:bg-slate-300"
+              >
+                Anladım, kabul ediyorum
+              </button>
+              <p class="mt-3 text-center text-xs text-slate-400">
+                Onay bir kez alınır ve cihazda saklanır · disclaimer Sonuç ekranında görünür kalır
+              </p>
+            </section>
+
+            <!-- ---------- SCREEN 2: HASTA GİRİŞİ ---------- -->
+            <section id="input" class="screen px-6 pb-10 pt-4">
+              <div class="mb-4 flex items-center justify-between">
+                <h2 class="text-2xl font-bold tracking-tight">Hasta</h2>
+                <button data-go="profile" class="text-sm font-medium text-accent-700">Profil ›</button>
+              </div>
+
+              <!-- active profile chip -->
+              <button data-go="profile" class="mb-5 flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-left">
+                <div>
+                  <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Etkin profil</p>
+                  <p class="mt-0.5 text-[15px] font-semibold">ESPGHAN 2018 Reference</p>
+                  <p class="mt-0.5 text-xs text-amber-700">rehber-temelli referans · merkez-validasyonlu değil</p>
+                </div>
+                <span class="text-slate-300">›</span>
+              </button>
+
+              <!-- weight -->
+              <div class="mb-4">
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Kilo <span class="font-normal text-slate-400">(kg)</span></label>
+                <div class="flex items-center rounded-2xl border border-slate-200 bg-white px-4 py-3 focus-within:border-accent-600">
+                  <input value="1.8" inputmode="decimal" class="tnum w-full bg-transparent text-2xl font-semibold outline-none" />
+                  <span class="text-sm font-medium text-slate-400">kg</span>
+                </div>
+              </div>
+
+              <!-- age -->
+              <div class="mb-4">
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Yaş <span class="font-normal text-slate-400">(gün)</span></label>
+                <div class="flex items-center rounded-2xl border border-slate-200 bg-white px-4 py-3 focus-within:border-accent-600">
+                  <input value="5" inputmode="numeric" class="tnum w-full bg-transparent text-2xl font-semibold outline-none" />
+                  <span class="text-sm font-medium text-slate-400">gün</span>
+                </div>
+              </div>
+
+              <!-- line segmented -->
+              <div class="mb-5">
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Hat tipi</label>
+                <div class="grid grid-cols-2 gap-1 rounded-2xl bg-slate-200/70 p-1">
+                  <button data-line="peripheral" class="seg-in rounded-xl py-2.5 text-sm font-semibold">Periferik</button>
+                  <button data-line="central" class="seg-in rounded-xl py-2.5 text-sm font-semibold">Santral</button>
+                </div>
+                <p class="mt-1.5 text-xs text-slate-400">Varsayılan profilden gelir (santral). Periferik seçilirse ozmolarite/dekstroz sınırları daha katıdır.</p>
+              </div>
+
+              <!-- optional section -->
+              <p class="mb-3 text-[11px] font-semibold uppercase tracking-wide text-slate-400">İsteğe bağlı</p>
+
+              <div class="mb-4">
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Gebelik haftası <span class="font-normal text-slate-400">(opsiyonel)</span></label>
+                <div class="flex items-center rounded-2xl border border-slate-200 bg-white px-4 py-3">
+                  <input placeholder="—" inputmode="numeric" class="tnum w-full bg-transparent text-lg font-semibold outline-none placeholder:text-slate-300" />
+                  <span class="text-sm font-medium text-slate-400">hafta</span>
+                </div>
+              </div>
+
+              <div class="mb-3 flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3.5">
+                <span class="text-[15px] font-medium text-slate-700">Fototerapi</span>
+                <span class="toggle relative h-7 w-12 rounded-full bg-slate-300 transition" data-on="false">
+                  <span class="dot absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow transition"></span>
+                </span>
+              </div>
+
+              <div class="mb-3 flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3.5">
+                <span class="text-[15px] font-medium text-slate-700">Radyan ısıtıcı</span>
+                <span class="toggle relative h-7 w-12 rounded-full bg-slate-300 transition" data-on="false">
+                  <span class="dot absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow transition"></span>
+                </span>
+              </div>
+
+              <div class="mb-5">
+                <label class="mb-1.5 block text-[13px] font-semibold text-slate-600">Sıvı kısıtı <span class="font-normal text-slate-400">(%)</span></label>
+                <div class="flex items-center rounded-2xl border border-slate-200 bg-white px-4 py-3">
+                  <input placeholder="0" inputmode="numeric" class="tnum w-full bg-transparent text-lg font-semibold outline-none placeholder:text-slate-300" />
+                  <span class="text-sm font-medium text-slate-400">%</span>
+                </div>
+              </div>
+
+              <!-- validation error preview -->
+              <button id="errToggle" class="mb-4 w-full rounded-xl border border-dashed border-slate-300 py-2 text-xs font-medium text-slate-400">
+                ↳ doğrulama hatası önizlemesini aç/kapat
+              </button>
+              <div id="errExample" class="mb-4 hidden rounded-2xl border border-red-200 bg-red-50 p-3">
+                <p class="text-[13px] font-semibold text-red-700">Kilo 0'dan büyük olmalı.</p>
+                <p class="mt-0.5 text-xs text-red-500">Geçersiz girişler satır içinde, ilgili alanın altında kırmızı gösterilir (TPNInputError).</p>
+              </div>
+
+              <button data-go="results" class="w-full rounded-2xl bg-accent-600 py-4 text-[15px] font-semibold text-white shadow-sm">
+                Hesapla
+              </button>
+            </section>
+
+            <!-- ---------- SCREEN 3: SONUÇ ---------- -->
+            <section id="results" class="screen px-6 pb-12 pt-4">
+              <div class="mb-3 flex items-center justify-between">
+                <button data-go="input" class="text-sm font-medium text-accent-700">‹ Düzenle</button>
+                <h2 class="text-lg font-bold tracking-tight">Sonuç</h2>
+                <button data-go="profile" class="text-sm font-medium text-accent-700">Profil ›</button>
+              </div>
+
+              <!-- line switch (drives warnings) -->
+              <div class="mb-4 grid grid-cols-2 gap-1 rounded-2xl bg-slate-200/70 p-1">
+                <button data-rline="peripheral" class="seg-r rounded-xl py-2 text-sm font-semibold">Periferik</button>
+                <button data-rline="central" class="seg-r rounded-xl py-2 text-sm font-semibold">Santral</button>
+              </div>
+
+              <!-- HARD warning banner (peripheral) -->
+              <div id="hardBanner" class="mb-4 rounded-2xl border-2 border-red-300 bg-red-50 p-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">⛔</span>
+                  <p class="text-[15px] font-bold text-red-700">Bağımsız doğrulama olmadan kullanılmamalı</p>
+                </div>
+                <p class="mt-1 text-[13px] text-red-600">2 katı (hard) güvenlik sınırı aşıldı:</p>
+                <ul class="mt-2 space-y-1.5">
+                  <li class="flex gap-2 text-[13px] text-red-700">
+                    <span class="font-mono text-[11px] mt-0.5 rounded bg-red-100 px-1.5 py-0.5 font-semibold">dextrose-peripheral-max</span>
+                  </li>
+                  <li class="text-[13px] text-red-700 pl-1">Dekstroz konsantrasyonu periferik hat için fazla yüksek.</li>
+                  <li class="flex gap-2 text-[13px] text-red-700">
+                    <span class="font-mono text-[11px] mt-0.5 rounded bg-red-100 px-1.5 py-0.5 font-semibold">osmolarity-peripheral</span>
+                  </li>
+                  <li class="text-[13px] text-red-700 pl-1">Periferik hat için ozmolarite üst sınırı aşıldı.</li>
+                </ul>
+              </div>
+
+              <!-- clean state (central) -->
+              <div id="cleanBanner" class="mb-4 hidden rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+                <p class="text-[14px] font-semibold text-emerald-700">✓ Sınır uyarısı yok</p>
+                <p class="mt-0.5 text-[13px] text-emerald-600">Bu hat için hard/soft güvenlik sınırı aşılmadı. Yine de sonuçları bağımsız doğrulayın.</p>
+              </div>
+
+              <!-- hero -->
+              <div class="mb-4 rounded-2xl border border-slate-200 bg-white p-5">
+                <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Toplam hacim</p>
+                <div class="mt-1 flex items-baseline gap-3">
+                  <span class="tnum text-4xl font-bold">270</span>
+                  <span class="text-lg font-medium text-slate-400">mL</span>
+                  <span class="tnum ml-auto text-lg font-semibold text-slate-600">150 <span class="text-sm font-normal text-slate-400">mL/kg</span></span>
+                </div>
+              </div>
+
+              <!-- cards -->
+              <div class="space-y-3">
+                <!-- glukoz -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                  <p class="mb-2 text-[13px] font-bold text-slate-700">Glukoz</p>
+                  <div class="grid grid-cols-2 gap-y-2 text-[14px]">
+                    <span class="text-slate-500">GIR</span><span class="tnum text-right font-semibold">12 <span class="text-xs font-normal text-slate-400">mg/kg/dk</span></span>
+                    <span class="text-slate-500">Final dekstroz</span><span class="tnum text-right font-semibold">%22.8</span>
+                    <span class="text-slate-500">Miktar</span><span class="tnum text-right font-semibold">31.1 <span class="text-xs font-normal text-slate-400">g</span></span>
+                    <span class="text-slate-500">Hacim</span><span class="tnum text-right font-semibold">136.6 <span class="text-xs font-normal text-slate-400">mL</span></span>
+                  </div>
+                </div>
+
+                <!-- AA + lipid -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                    <p class="mb-2 text-[13px] font-bold text-slate-700">Amino asit</p>
+                    <p class="tnum text-2xl font-bold">3.5 <span class="text-sm font-normal text-slate-400">g/kg</span></p>
+                    <p class="tnum mt-1 text-[13px] text-slate-500">6.3 g · 63 mL</p>
+                  </div>
+                  <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                    <p class="mb-2 text-[13px] font-bold text-slate-700">Lipid</p>
+                    <p class="tnum text-2xl font-bold">4.0 <span class="text-sm font-normal text-slate-400">g/kg</span></p>
+                    <p class="tnum mt-1 text-[13px] text-slate-500">7.2 g · 36 mL</p>
+                  </div>
+                </div>
+
+                <!-- elektrolitler -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                  <p class="mb-3 text-[13px] font-bold text-slate-700">Elektrolitler</p>
+                  <table class="tnum w-full text-[13px]">
+                    <thead>
+                      <tr class="text-[11px] uppercase tracking-wide text-slate-400">
+                        <th class="text-left font-semibold pb-1.5">İyon</th>
+                        <th class="text-right font-semibold pb-1.5">mmol/kg</th>
+                        <th class="text-right font-semibold pb-1.5">toplam</th>
+                        <th class="text-right font-semibold pb-1.5">hacim</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Sodyum</td><td class="text-right">3</td><td class="text-right">5.4</td><td class="text-right text-slate-500">5.4 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Potasyum</td><td class="text-right">2</td><td class="text-right">3.6</td><td class="text-right text-slate-500">3.6 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Kalsiyum</td><td class="text-right">1.6</td><td class="text-right">2.88</td><td class="text-right text-slate-500">12.8 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Magnezyum</td><td class="text-right">0.2</td><td class="text-right">0.36</td><td class="text-right text-slate-500">0.7 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Fosfat</td><td class="text-right">1.6</td><td class="text-right">2.88</td><td class="text-right text-slate-500">2.9 mL</td></tr>
+                      <tr><td class="py-1.5 text-left font-medium text-slate-600">Klorür</td><td class="text-right">3</td><td class="text-right">5.4</td><td class="text-right text-slate-500">5.4 mL</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- additifler -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                  <p class="mb-2 text-[13px] font-bold text-slate-700">Additifler</p>
+                  <div class="tnum grid grid-cols-3 gap-2 text-center text-[13px]">
+                    <div class="rounded-xl bg-slate-50 py-2"><p class="text-slate-500">İz element</p><p class="font-semibold">1.8 mL</p></div>
+                    <div class="rounded-xl bg-slate-50 py-2"><p class="text-slate-500">Vitamin</p><p class="font-semibold">1.8 mL</p></div>
+                    <div class="rounded-xl bg-slate-50 py-2"><p class="text-slate-500">Heparin</p><p class="font-semibold text-slate-400">kapalı</p></div>
+                  </div>
+                </div>
+
+                <!-- enerji -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                  <p class="mb-2 text-[13px] font-bold text-slate-700">Enerji</p>
+                  <div class="mb-3 flex items-baseline gap-2">
+                    <span class="tnum text-2xl font-bold">118.8</span><span class="text-sm text-slate-400">kcal/kg</span>
+                    <span class="tnum ml-auto text-[13px] text-slate-500">toplam 213.8 kcal</span>
+                  </div>
+                  <div class="flex h-3 overflow-hidden rounded-full">
+                    <div class="bg-accent-600" style="width:54.5%"></div>
+                    <div class="bg-accent-100" style="width:11.8%"></div>
+                    <div class="bg-amber-300" style="width:33.7%"></div>
+                  </div>
+                  <div class="tnum mt-2 flex justify-between text-[11px] text-slate-500">
+                    <span><span class="font-semibold text-accent-700">KH</span> %54.5</span>
+                    <span><span class="font-semibold text-accent-600">Protein</span> %11.8</span>
+                    <span><span class="font-semibold text-amber-600">Yağ</span> %33.7</span>
+                  </div>
+                </div>
+
+                <!-- ozmolarite -->
+                <div class="rounded-2xl border-2 border-red-200 bg-red-50 p-4">
+                  <div class="flex items-center justify-between">
+                    <p class="text-[13px] font-bold text-red-700">Ozmolarite</p>
+                    <span class="tnum text-2xl font-bold text-red-700">1021.5 <span class="text-sm font-normal">mOsm/L</span></span>
+                  </div>
+                  <p class="mt-1 text-xs text-red-500">Periferik hat üst sınırının üzerinde (santral hatta uyarı temizlenir).</p>
+                </div>
+
+                <!-- türetilmiş -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                  <p class="mb-2 text-[13px] font-bold text-slate-700">Türetilmiş değerler</p>
+                  <div class="tnum grid grid-cols-2 gap-y-2 text-[13px]">
+                    <span class="text-slate-500">Aköz hacim</span><span class="text-right font-semibold">234 mL</span>
+                    <span class="text-slate-500">Lipid hacmi</span><span class="text-right font-semibold">36 mL</span>
+                    <span class="text-slate-500">Dekstroz suyu</span><span class="text-right font-semibold">136.6 mL</span>
+                    <span class="text-slate-500">Ca × P çarpımı</span><span class="text-right font-semibold">151.5</span>
+                  </div>
+                </div>
+
+                <!-- color key legend -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                  <p class="mb-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Uyarı renk anahtarı</p>
+                  <div class="flex gap-2">
+                    <span class="flex-1 rounded-lg border border-red-200 bg-red-50 px-2 py-1.5 text-center text-[12px] font-semibold text-red-700">kırmızı = hard / blok</span>
+                    <span class="flex-1 rounded-lg border border-amber-200 bg-amber-50 px-2 py-1.5 text-center text-[12px] font-semibold text-amber-700">amber = soft / uyarı</span>
+                  </div>
+                </div>
+
+                <!-- disclaimer + provenance footer -->
+                <div class="rounded-2xl bg-slate-100 p-4">
+                  <p class="text-[12px] leading-relaxed text-slate-500">
+                    Klinik karar-destek aracı · reçeteyi yazan klinisyen tek sorumludur ·
+                    sonuçları bağımsız doğrulayın.
+                  </p>
+                  <button data-go="profile" class="mt-2 text-[12px] font-semibold text-accent-700">
+                    Profil: ESPGHAN 2018 Reference — rehber-temelli referans, merkez-validasyonlu değil ›
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- ---------- SCREEN 4: PROFİL / PROVENANCE ---------- -->
+            <section id="profile" class="screen px-6 pb-12 pt-4">
+              <div class="mb-4 flex items-center gap-3">
+                <button data-go="input" class="text-sm font-medium text-accent-700">‹ Geri</button>
+                <h2 class="text-lg font-bold tracking-tight">Etkin profil</h2>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200 bg-white p-5">
+                <p class="text-xl font-bold tracking-tight">ESPGHAN 2018 Reference</p>
+                <p class="text-[13px] text-slate-500">preterm &gt;1500 g · NICU</p>
+                <span class="mt-3 inline-block rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[12px] font-semibold text-amber-700">
+                  rehber-temelli referans · merkez-validasyonlu değil
+                </span>
+                <div class="tnum mt-4 grid grid-cols-2 gap-y-2 border-t border-slate-100 pt-4 text-[13px]">
+                  <span class="text-slate-500">Sürüm</span><span class="text-right font-semibold">0.1.0</span>
+                  <span class="text-slate-500">Son inceleme</span><span class="text-right font-semibold">2026-06-16</span>
+                  <span class="text-slate-500">İnceleyen</span><span class="text-right font-semibold text-[12px]">Sahin Parlak</span>
+                </div>
+              </div>
+
+              <p class="mt-5 mb-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Dozlama — rehbere izlenebilir</p>
+              <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+                <table class="tnum w-full text-[12.5px]">
+                  <tbody class="divide-y divide-slate-100">
+                    <tr><td class="px-3 py-2 text-slate-600">GIR (başla/ilerlet/maks)</td><td class="px-3 py-2 text-right font-semibold">4 / 2 / 12</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 5.4</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Amino asit (g/kg)</td><td class="px-3 py-2 text-right font-semibold">1.5 → 3.5</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 3.1–3.3</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Lipid (g/kg)</td><td class="px-3 py-2 text-right font-semibold">1.0 → 4.0</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 4.2–4.3</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Sıvı (mL/kg)</td><td class="px-3 py-2 text-right font-semibold">70 → 150</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">Jochum'18</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Enerji hedef</td><td class="px-3 py-2 text-right font-semibold">90–120</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 2.6</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Na / K / Cl</td><td class="px-3 py-2 text-right font-semibold">3 / 2 / 3</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">Tablo 3</td></tr>
+                    <tr><td class="px-3 py-2 text-slate-600">Ca / P / Mg</td><td class="px-3 py-2 text-right font-semibold">1.6 / 1.6 / 0.2</td><td class="px-3 py-2 text-right text-[11px] text-slate-400">R 8.9</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
+                <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Temsilî değerler</p>
+                <p class="mt-1 text-[13px] leading-relaxed text-slate-600">
+                  Dekstroz % sınırları, stok konsantrasyonları ve ürün bilgileri rehberde tek sayı
+                  olarak verilmez — fizikokimyasal yaklaşım / eczane gerçeğidir. Her merkez bunları
+                  değiştirip <b>validasyon</b> yapmalıdır.
+                </p>
+              </div>
+
+              <p class="mt-4 text-center text-[12px] text-slate-400">
+                Tam kaynak listesi: <code class="rounded bg-slate-200/70 px-1">espghan-2018-reference.sources.md</code>
+              </p>
+            </section>
+          </div>
+
+          <!-- home indicator -->
+          <div class="absolute bottom-2 left-1/2 h-1 w-32 -translate-x-1/2 rounded-full bg-slate-400/60"></div>
+        </div>
+      </div>
+    </main>
+
+    <p class="pb-10 text-center text-xs text-slate-400">
+      Tıklanabilir prototip · NativeWind ≈ Tailwind olduğundan bu sınıflar RN'e neredeyse birebir taşınır.
+    </p>
+
+    <script>
+      const screens = ['disclaimer', 'input', 'results', 'profile'];
+      function show(id) {
+        document.querySelectorAll('.screen').forEach((s) => s.classList.toggle('active', s.id === id));
+        document.querySelectorAll('.rail-btn').forEach((b) => {
+          const on = b.dataset.go === id;
+          b.classList.toggle('bg-accent-600', on);
+          b.classList.toggle('text-white', on);
+          b.classList.toggle('text-slate-600', !on);
+        });
+        document.querySelector('.phone-scroll').scrollTop = 0;
+      }
+      // generic navigation
+      document.querySelectorAll('[data-go]').forEach((el) => {
+        el.addEventListener('click', () => {
+          if (el.id === 'acceptBtn' && el.disabled) return;
+          show(el.dataset.go);
+        });
+      });
+      // consent gates accept button
+      const consent = document.getElementById('consent');
+      const acceptBtn = document.getElementById('acceptBtn');
+      consent.addEventListener('change', () => (acceptBtn.disabled = !consent.checked));
+      // input-line segmented (visual only)
+      function paintSeg(group, attr, val) {
+        document.querySelectorAll(group).forEach((b) => {
+          const on = b.dataset[attr] === val;
+          b.classList.toggle('bg-white', on);
+          b.classList.toggle('shadow-sm', on);
+          b.classList.toggle('text-accent-700', on);
+          b.classList.toggle('text-slate-500', !on);
+        });
+      }
+      document.querySelectorAll('.seg-in').forEach((b) =>
+        b.addEventListener('click', () => paintSeg('.seg-in', 'line', b.dataset.line)),
+      );
+      // results-line segmented drives warning banner
+      function setResultsLine(val) {
+        paintSeg('.seg-r', 'rline', val);
+        const peripheral = val === 'peripheral';
+        document.getElementById('hardBanner').classList.toggle('hidden', !peripheral);
+        document.getElementById('cleanBanner').classList.toggle('hidden', peripheral);
+      }
+      document.querySelectorAll('.seg-r').forEach((b) =>
+        b.addEventListener('click', () => setResultsLine(b.dataset.rline)),
+      );
+      // toggles
+      document.querySelectorAll('.toggle').forEach((t) =>
+        t.addEventListener('click', () => {
+          const on = t.dataset.on === 'true';
+          t.dataset.on = String(!on);
+          t.classList.toggle('bg-accent-600', !on);
+          t.classList.toggle('bg-slate-300', on);
+          t.querySelector('.dot').classList.toggle('translate-x-5', !on);
+        }),
+      );
+      // error preview toggle
+      document.getElementById('errToggle').addEventListener('click', () =>
+        document.getElementById('errExample').classList.toggle('hidden'),
+      );
+      // init
+      show('disclaimer');
+      paintSeg('.seg-in', 'line', 'central');
+      setResultsLine('peripheral');
+    </script>
+  </body>
+</html>
