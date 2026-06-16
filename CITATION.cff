@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "TPN Calculator"
+abstract: >-
+  Configurable parenteral nutrition (TPN) calculator for neonatal and pediatric
+  patients: a framework-agnostic calculation engine plus per-center configuration
+  profiles. No clinical value is hardcoded — every dose, limit and product comes
+  from a center profile.
+type: software
+authors:
+  - family-names: "Parlak"
+    given-names: "Sahin"
+license: MIT
+repository-code: "https://github.com/sahinparlak/tpn-calculator"
+url: "https://github.com/sahinparlak/tpn-calculator"
+keywords:
+  - "parenteral nutrition"
+  - "total parenteral nutrition"
+  - "neonatal"
+  - "pediatrics"
+  - "clinical decision support"
+  - "neonatal intensive care"
