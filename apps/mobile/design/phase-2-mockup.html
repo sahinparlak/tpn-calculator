@@ -77,35 +77,24 @@
               <div class="flex-1">
                 <h2 class="text-[26px] font-bold leading-tight tracking-tight">Başlamadan önce</h2>
                 <p class="mt-3 text-[16px] leading-relaxed text-slate-600">
-                  Bu, nitelikli sağlık profesyonelleri için
-                  <span class="font-semibold text-ink">araştırma ve eğitim amaçlı</span> bir karar
-                  desteğidir; tek başına klinik kullanım için değildir. Sonuçları
-                  <span class="font-semibold text-ink">her zaman bağımsız doğrulayın</span> —
-                  veriyi giren ve kullanan hekim tüm sorumluluğu üstlenir.
+                  TPN Hesaplayıcı, nitelikli hekimler için bir
+                  <span class="font-semibold text-ink">karar-destek</span> aracıdır —
+                  hesaplamada yardımcı olur, klinik kararın yerini almaz.
+                  Sonuçları <span class="font-semibold text-ink">her zaman bağımsız doğrula</span>.
                 </p>
 
                 <div class="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3.5">
                   <p class="text-[14px] leading-relaxed text-amber-800">
-                    Etkin profil rehber-temellidir, <b>merkez-validasyonlu değildir</b>.
+                    Bu sürüm araştırma/eğitim amaçlıdır; etkin profil rehber-temellidir,
+                    <b>merkez-validasyonlu değildir</b>.
                   </p>
                 </div>
-
-                <button id="moreBtn" class="mt-5 text-[13px] font-medium text-accent-700">
-                  Tüm koşulları oku ›
-                </button>
-                <ul id="moreText" class="mt-3 hidden list-disc space-y-2 pl-5 text-[13px] leading-relaxed text-slate-500 marker:text-slate-300">
-                  <li>Hesaplar kullanıcının sağladığı merkez-özel profile ve girilen veriye dayanır; motor hiçbir klinik sabit içermez — sonuç sizin yapılandırmanızı yansıtır.</li>
-                  <li>Yazılım "olduğu gibi" sunulur; doğruluk dâhil hiçbir garanti verilmez (LICENSE).</li>
-                  <li>Kullanım tamamen kullanıcının riskindedir; her sonucu doğrulamak ve tüm klinik kararlar kullanıcının sorumluluğundadır.</li>
-                  <li>Hiçbir düzenleyici otoritece tıbbi cihaz olarak onaylı/kayıtlı değildir.</li>
-                  <li class="font-medium text-slate-600">Tam metin: <code class="rounded bg-slate-200/70 px-1">DISCLAIMER.md</code></li>
-                </ul>
               </div>
 
               <div class="mt-8">
                 <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3.5">
                   <input id="consent" type="checkbox" class="mt-0.5 h-5 w-5 shrink-0 accent-accent-600" />
-                  <span class="text-[14px] font-medium leading-snug text-slate-700">Nitelikli bir hekim olduğumu, koşulları okuduğumu ve sorumluluğu üstlendiğimi kabul ediyorum</span>
+                  <span class="text-[14px] font-medium leading-snug text-slate-700">Nitelikli hekimim; <button id="termsLink" type="button" class="font-semibold text-accent-700 underline decoration-accent-300 underline-offset-2">koşulları</button> kabul ediyor ve sorumluluğu üstleniyorum.</span>
                 </label>
                 <button
                   id="acceptBtn"
@@ -433,6 +422,42 @@
             </section>
           </div>
 
+          <!-- terms modal (on-demand full text; never forced into the gate) -->
+          <div id="termsModal" class="absolute inset-0 z-20 hidden">
+            <div id="termsBackdrop" class="absolute inset-0 bg-black/40"></div>
+            <div class="absolute inset-x-0 bottom-0 overflow-hidden rounded-t-[28px] bg-white">
+              <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4">
+                <p class="text-[15px] font-bold">Kullanım koşulları</p>
+                <button id="termsClose" class="text-sm font-semibold text-accent-700">Kapat</button>
+              </div>
+              <div class="phone-scroll max-h-[600px] space-y-4 overflow-y-auto px-5 py-4 text-[13px] leading-relaxed text-slate-600">
+                <div>
+                  <p class="font-semibold text-ink">Amaç</p>
+                  <p>Araştırma ve eğitim amaçlı, nitelikli sağlık profesyonelleri için bir karar desteğidir; profesyonel yargının yerini almaz. Motor hiçbir klinik sabit içermez — sonuç, kullanıcının sağladığı profili ve girdisini yansıtır.</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-ink">Garanti yok</p>
+                  <p>Yazılım "olduğu gibi" sunulur; doğruluk, eksiksizlik ve belirli amaca uygunluk dâhil hiçbir garanti verilmez (LICENSE).</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-ink">Risk ve sorumluluk kullanıcıda</p>
+                  <p>Kullanım tamamen kullanıcının riskindedir. Profili doğrulamak, her sonucu bağımsız kontrol etmek ve tüm klinik kararlar/istemler kullanıcının sorumluluğundadır.</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-ink">Sorumluluğun sınırı & tazminat</p>
+                  <p>Yürürlükteki hukukun izin verdiği azami ölçüde yazarlar oluşabilecek zararlardan sorumlu değildir; kullanıcı, kullanımından doğan taleplere karşı yazarları beri tutar.</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-ink">Düzenleyici durum</p>
+                  <p>Hiçbir otoritece (FDA, AB MDR, TİTCK) tıbbi cihaz olarak onaylı/kayıtlı değildir. Sınıflandırma, kullananın verdiği amaca bağlıdır ve bu sorumluluk kullanıcıya aittir.</p>
+                </div>
+                <p class="text-[11px] text-slate-400">
+                  Tam metin: <code class="rounded bg-slate-200/70 px-1">DISCLAIMER.md</code> · bu özet hukuki tavsiye değildir.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <!-- home indicator -->
           <div class="absolute bottom-2 left-1/2 h-1 w-32 -translate-x-1/2 rounded-full bg-slate-400/60"></div>
         </div>
@@ -503,14 +528,19 @@
       document.getElementById('errToggle').addEventListener('click', () =>
         document.getElementById('errExample').classList.toggle('hidden'),
       );
-      // disclaimer "read full text" toggle
-      document.getElementById('moreBtn').addEventListener('click', (e) => {
-        const box = document.getElementById('moreText');
-        box.classList.toggle('hidden');
-        e.target.textContent = box.classList.contains('hidden')
-          ? 'Tüm klinik metni oku ›'
-          : 'Tüm klinik metni gizle ‹';
+      // terms modal — opened on demand from the consent link, never forced into the gate
+      const termsModal = document.getElementById('termsModal');
+      document.getElementById('termsLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        termsModal.classList.remove('hidden');
       });
+      document.getElementById('termsClose').addEventListener('click', () =>
+        termsModal.classList.add('hidden'),
+      );
+      document.getElementById('termsBackdrop').addEventListener('click', () =>
+        termsModal.classList.add('hidden'),
+      );
       // init
       show('disclaimer');
       paintSeg('.seg-in', 'line', 'central');
