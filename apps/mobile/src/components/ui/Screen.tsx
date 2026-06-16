@@ -18,14 +18,16 @@ export function Screen({ children, scroll = true, edges = ['top', 'bottom'], con
       <SafeAreaView className="flex-1" edges={edges}>
         {scroll ? (
           <ScrollView
-            contentContainerClassName={cn('px-6 pb-12 pt-4', contentClassName)}
+            contentContainerClassName={cn('mx-auto w-full max-w-[480px] px-6 pb-12 pt-4', contentClassName)}
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
             {children}
           </ScrollView>
         ) : (
-          <View className={cn('flex-1 px-6 pb-8 pt-8', contentClassName)}>{children}</View>
+          <View className={cn('w-full max-w-[480px] flex-1 self-center px-6 pb-8 pt-8', contentClassName)}>
+            {children}
+          </View>
         )}
       </SafeAreaView>
     </View>
