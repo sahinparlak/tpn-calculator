@@ -7,6 +7,7 @@ import { Screen } from '../components/ui/Screen';
 import { SegmentedControl } from '../components/ui/SegmentedControl';
 import { r1 } from '../lib/format';
 import { useStrings } from '../lib/i18n';
+import { unitLabels } from '../lib/units';
 import { useActiveProfile } from '../store/profiles';
 import { toPatientInput, usePatientStore } from '../store/patient';
 
@@ -58,6 +59,7 @@ export default function ResultScreen() {
   const s = useStrings();
   const form = usePatientStore();
   const activeProfile = useActiveProfile();
+  const units = unitLabels(activeProfile);
   const parsed = toPatientInput(form, s.patient.errors);
 
   if ('errors' in parsed) {
@@ -200,7 +202,7 @@ export default function ResultScreen() {
           <View className="flex-row border-b border-slate-100 pb-1.5">
             <Text className="flex-1 font-inter-semibold text-[11px] uppercase text-slate-400">{s.result.ion}</Text>
             <Text className="w-16 text-right font-inter-semibold text-[11px] uppercase text-slate-400">
-              {s.result.perKg}
+              {units.electrolytePerKg}
             </Text>
             <Text className="w-12 text-right font-inter-semibold text-[11px] uppercase text-slate-400">
               {s.result.total}
@@ -242,9 +244,9 @@ export default function ResultScreen() {
           <CardTitle>{s.result.energy}</CardTitle>
           <View className="mb-3 flex-row items-baseline">
             <Text className="font-display text-3xl text-ink">{r1(result.energy.kcalPerKg)}</Text>
-            <Text className="ml-1 font-inter text-sm text-slate-400">kcal/kg</Text>
+            <Text className="ml-1 font-inter text-sm text-slate-400">{units.energyPerKg}</Text>
             <Text className="ml-auto font-inter text-[13px] text-slate-500">
-              total {r1(result.energy.totalKcal)} kcal
+              {s.result.total} {r1(result.energy.totalKcal)} {units.energy}
             </Text>
           </View>
           <View className="h-3 flex-row overflow-hidden rounded-full">
@@ -290,7 +292,7 @@ export default function ResultScreen() {
           <CardTitle>{s.result.derived}</CardTitle>
           <KV k={s.result.aqueousVolume} v={`${r1(result.derived.aqueousVolumeMl)} mL`} />
           <KV k={s.result.lipidVolume} v={`${r1(result.derived.lipidVolumeMl)} mL`} />
-          <KV k={s.result.caPProduct} v={`${r1(result.derived.caPhosphateProduct)} (mmol/L)²`} />
+          <KV k={s.result.caPProduct} v={`${r1(result.derived.caPhosphateProduct)} ${units.caPhosphateProduct}`} />
           <Text className="mt-1 font-inter text-[11px] leading-relaxed text-slate-400">{s.result.caPProductNote}</Text>
         </Card>
 

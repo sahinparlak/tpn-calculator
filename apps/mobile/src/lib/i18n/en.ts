@@ -96,7 +96,6 @@ export const en = {
     lipid: 'Lipid',
     electrolytes: 'Electrolytes',
     ion: 'Ion',
-    perKg: 'mmol/kg',
     total: 'total',
     additives: 'Additives',
     off: 'off',
@@ -111,7 +110,7 @@ export const en = {
     lipidVolume: 'Lipid volume',
     caPProduct: 'Ca × P solubility product',
     caPProductNote:
-      'Simplified estimate in (mmol/L)² — not the classic mg²/dL² precipitation threshold. Confirm physical compatibility with your pharmacy.',
+      'Simplified estimate — not the classic mg²/dL² precipitation threshold. Confirm physical compatibility with your pharmacy.',
     colorKey: 'Warning color key',
     hardKey: 'red = hard / block',
     softKey: 'amber = soft / caution',
