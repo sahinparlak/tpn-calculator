@@ -3,11 +3,12 @@ import { Pressable, Text, View } from 'react-native';
 import { Card } from '../components/ui/Card';
 import { Screen } from '../components/ui/Screen';
 import { useStrings } from '../lib/i18n';
-import { activeProfile, provenanceDosing } from '../lib/profile';
+import { provenanceDosing } from '../lib/profile';
+import { useActiveProfile } from '../store/profiles';
 
 export default function ProfileScreen() {
   const s = useStrings();
-  const meta = activeProfile.meta;
+  const meta = useActiveProfile().meta;
 
   return (
     <Screen>

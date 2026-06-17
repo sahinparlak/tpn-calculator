@@ -1,11 +1,12 @@
 import type { TPNProfile } from '@tpn/engine';
 
-// Single embedded profile for the Phase 2 MVP. Source of truth lives at the repo
-// root; the engine treats it as opaque configuration (no clinical constants in the
-// app). Profile editing / selection is Phase 3 — for now this is read-only.
+// The bundled reference profile. Source of truth lives at the repo root; the
+// engine treats it as opaque configuration (no clinical constants in the app).
+// This ships as the read-only "builtin" profile that seeds the profile store
+// (see `store/profiles.ts`); users select, clone or edit profiles on top of it.
 import espghanProfile from '../../../../profiles/espghan-2018-reference.json';
 
-export const activeProfile = espghanProfile as unknown as TPNProfile;
+export const BUILTIN_PROFILE = espghanProfile as unknown as TPNProfile;
 
 /**
  * Guideline-traceable dosing summary shown on the provenance screen. This mirrors

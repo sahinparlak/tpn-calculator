@@ -7,17 +7,21 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { fontMap } from '../lib/fonts';
+import { useProfilesStore } from '../store/profiles';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts(fontMap);
+  // Wait for persisted profiles so the active profile is correct on first paint.
+  const profilesHydrated = useProfilesStore((s) => s.hydrated);
+  const ready = fontsLoaded && profilesHydrated;
 
   useEffect(() => {
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded]);
+    if (ready) SplashScreen.hideAsync();
+  }, [ready]);
 
-  if (!fontsLoaded) return null;
+  if (!ready) return null;
 
   return (
     <SafeAreaProvider>

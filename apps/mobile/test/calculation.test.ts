@@ -1,11 +1,11 @@
 // Integration test for the app's clinical pipeline: form parsing
-// (`toPatientInput`) → embedded ESPGHAN profile (`activeProfile`) → engine
+// (`toPatientInput`) → bundled ESPGHAN profile (`BUILTIN_PROFILE`) → engine
 // (`calculateTPN`). No clinical logic lives in the app, so this verifies the
 // wiring is correct end-to-end, not the numbers themselves (the engine has its
 // own reference tests).
 import { calculateTPN } from '@tpn/engine';
 import { en } from '../src/lib/i18n/en';
-import { activeProfile } from '../src/lib/profile';
+import { BUILTIN_PROFILE } from '../src/lib/profile';
 import { type PatientFormState, toPatientInput } from '../src/store/patient';
 
 // A small, low-birth-weight preterm on day 1: on a peripheral line the admixture
@@ -25,7 +25,7 @@ const baseForm: PatientFormState = {
 function hardRuleIds(line: PatientFormState['line']): string[] {
   const parsed = toPatientInput({ ...baseForm, line }, en.patient.errors);
   if ('errors' in parsed) throw new Error(`unexpected validation errors: ${JSON.stringify(parsed.errors)}`);
-  return calculateTPN(parsed.input, activeProfile)
+  return calculateTPN(parsed.input, BUILTIN_PROFILE)
     .warnings.filter((w) => w.level === 'hard')
     .map((w) => w.ruleId);
 }

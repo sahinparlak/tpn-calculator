@@ -8,10 +8,12 @@ import { SegmentedControl } from '../components/ui/SegmentedControl';
 import { ToggleRow } from '../components/ui/Toggle';
 import { useStrings } from '../lib/i18n';
 import { type FieldErrors, toPatientInput, usePatientStore } from '../store/patient';
+import { useActiveProfile } from '../store/profiles';
 
 export default function PatientScreen() {
   const s = useStrings();
   const form = usePatientStore();
+  const activeProfile = useActiveProfile();
   const [errors, setErrors] = useState<FieldErrors>({});
 
   function onCalculate() {
@@ -47,7 +49,7 @@ export default function PatientScreen() {
           <Text className="font-inter-semibold text-[11px] uppercase tracking-wide text-slate-400">
             {s.patient.activeProfile}
           </Text>
-          <Text className="mt-0.5 font-inter-semibold text-[15px] text-ink">ESPGHAN 2018 Reference</Text>
+          <Text className="mt-0.5 font-inter-semibold text-[15px] text-ink">{activeProfile.meta.name}</Text>
           <Text className="mt-0.5 font-inter text-xs text-amber-700">{s.patient.profileNote}</Text>
         </View>
         <Text className="font-inter text-slate-300">›</Text>

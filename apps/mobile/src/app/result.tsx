@@ -7,7 +7,7 @@ import { Screen } from '../components/ui/Screen';
 import { SegmentedControl } from '../components/ui/SegmentedControl';
 import { r1 } from '../lib/format';
 import { useStrings } from '../lib/i18n';
-import { activeProfile } from '../lib/profile';
+import { useActiveProfile } from '../store/profiles';
 import { toPatientInput, usePatientStore } from '../store/patient';
 
 function num(v: number | string | undefined): number {
@@ -57,6 +57,7 @@ function HardBanner({ warnings, title, countLabel }: { warnings: Warning[]; titl
 export default function ResultScreen() {
   const s = useStrings();
   const form = usePatientStore();
+  const activeProfile = useActiveProfile();
   const parsed = toPatientInput(form, s.patient.errors);
 
   if ('errors' in parsed) {
