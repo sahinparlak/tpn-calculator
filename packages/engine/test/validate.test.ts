@@ -164,3 +164,91 @@ describe('validateProfile', () => {
     expect(paths(expectInvalid(validateProfile(profile)))).toContain('safety.rules[0].ref');
   });
 });
+
+describe('validateProfile — error branches', () => {
+  // Assign deliberately wrong types without `any`, for error-path coverage.
+  const rec = (o: unknown): Record<string, unknown> => o as Record<string, unknown>;
+
+  it('flags a missing and a wrong-typed top-level section', () => {
+    const profile = cloneProfile();
+    rec(profile).patient = null; // missing section
+    rec(profile).energy = 'nope'; // not an object
+    const p = paths(expectInvalid(validateProfile(profile)));
+    expect(p).toContain('patient');
+    expect(p).toContain('energy');
+  });
+
+  it('flags non-finite numbers, exclusive-min violations, and bad text', () => {
+    const profile = cloneProfile();
+    rec(profile.glucose).girStart = 'high'; // not a number
+    rec(profile.glucose).girAdvance = 0; // must be > 0
+    rec(profile.meta).name = 123; // must be text
+    profile.meta.reviewedBy = ''; // required, empty
+    const p = paths(expectInvalid(validateProfile(profile)));
+    expect(p).toEqual(
+      expect.arrayContaining(['glucose.girStart', 'glucose.girAdvance', 'meta.name', 'meta.reviewedBy']),
+    );
+  });
+
+  it('flags wrong-typed nested groups', () => {
+    const profile = cloneProfile();
+    rec(profile.energy).targetKcalPerKg = 'x';
+    rec(profile.energy).kcalPerGram = 'x';
+    rec(profile.glucose).stockConcentrations = []; // empty list
+    rec(profile.osmolarity).electrolyteMOsmPerUnit = 'x';
+    const p = paths(expectInvalid(validateProfile(profile)));
+    expect(p).toEqual(
+      expect.arrayContaining([
+        'energy.targetKcalPerKg',
+        'energy.kcalPerGram',
+        'glucose.stockConcentrations',
+        'osmolarity.electrolyteMOsmPerUnit',
+      ]),
+    );
+  });
+
+  it('flags wrong-typed electrolytes, additives, and safety.rules', () => {
+    const profile = cloneProfile();
+    rec(profile.electrolytes).sodium = 'x';
+    rec(profile.additives).vitamins = 'x';
+    rec(profile.safety).rules = 'not-a-list';
+    const p = paths(expectInvalid(validateProfile(profile)));
+    expect(p).toEqual(expect.arrayContaining(['electrolytes.sodium', 'additives.vitamins', 'safety.rules']));
+  });
+
+  it('flags a safety rule that is not an object', () => {
+    const profile = cloneProfile();
+    rec(profile.safety).rules = ['oops'];
+    expect(paths(expectInvalid(validateProfile(profile)))).toContain('safety.rules[0]');
+  });
+
+  it('flags a macronutrient with a missing product section', () => {
+    const profile = cloneProfile();
+    rec(profile.aminoAcid).product = null;
+    expect(paths(expectInvalid(validateProfile(profile)))).toContain('aminoAcid.product');
+  });
+
+  it('rejects an empty fluid schedule', () => {
+    const profile = cloneProfile();
+    profile.fluid.schedulePerKg = [];
+    expect(paths(expectInvalid(validateProfile(profile)))).toContain('fluid.schedulePerKg');
+  });
+
+  it('rejects a fluid step that is not an object', () => {
+    const profile = cloneProfile();
+    rec(profile.fluid).schedulePerKg = ['nope'];
+    expect(paths(expectInvalid(validateProfile(profile)))).toContain('fluid.schedulePerKg[0]');
+  });
+
+  it('rejects a fluid step whose dayTo precedes dayFrom', () => {
+    const profile = cloneProfile();
+    profile.fluid.schedulePerKg = [{ dayFrom: 5, dayTo: 2, mlPerKg: 100 }];
+    expect(paths(expectInvalid(validateProfile(profile)))).toContain('fluid.schedulePerKg[0].dayTo');
+  });
+
+  it('rejects a profile holding a non-finite number (assertProfileFilled)', () => {
+    const profile = cloneProfile();
+    rec(profile.glucose).girMax = Number.NaN;
+    expect(() => assertProfileFilled(profile)).toThrow(TPNProfileError);
+  });
+});
