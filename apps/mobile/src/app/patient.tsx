@@ -8,12 +8,13 @@ import { SegmentedControl } from '../components/ui/SegmentedControl';
 import { ToggleRow } from '../components/ui/Toggle';
 import { useStrings } from '../lib/i18n';
 import { type FieldErrors, toPatientInput, usePatientStore } from '../store/patient';
-import { useActiveProfile } from '../store/profiles';
+import { useActiveStoredProfile } from '../store/profiles';
 
 export default function PatientScreen() {
   const s = useStrings();
   const form = usePatientStore();
-  const activeProfile = useActiveProfile();
+  const active = useActiveStoredProfile();
+  const isBuiltin = active.source === 'builtin';
   const [errors, setErrors] = useState<FieldErrors>({});
 
   function onCalculate() {
@@ -31,7 +32,7 @@ export default function PatientScreen() {
       <View className="mb-4 flex-row items-center justify-between">
         <Text className="font-display text-2xl tracking-tight text-ink">{s.patient.title}</Text>
         <Pressable
-          onPress={() => router.push('/profile')}
+          onPress={() => router.push('/profiles')}
           accessibilityRole="button"
           hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
         >
@@ -41,7 +42,7 @@ export default function PatientScreen() {
 
       {/* active profile chip */}
       <Pressable
-        onPress={() => router.push('/profile')}
+        onPress={() => router.push('/profiles')}
         accessibilityRole="button"
         className="mb-5 flex-row items-center justify-between rounded-2xl border border-slate-200 bg-white p-4"
       >
@@ -49,8 +50,10 @@ export default function PatientScreen() {
           <Text className="font-inter-semibold text-[11px] uppercase tracking-wide text-slate-400">
             {s.patient.activeProfile}
           </Text>
-          <Text className="mt-0.5 font-inter-semibold text-[15px] text-ink">{activeProfile.meta.name}</Text>
-          <Text className="mt-0.5 font-inter text-xs text-amber-700">{s.patient.profileNote}</Text>
+          <Text className="mt-0.5 font-inter-semibold text-[15px] text-ink">{active.profile.meta.name}</Text>
+          <Text className={`mt-0.5 font-inter text-xs ${isBuiltin ? 'text-amber-700' : 'text-slate-400'}`}>
+            {isBuiltin ? s.patient.profileNote : s.profiles.centerProfile}
+          </Text>
         </View>
         <Text className="font-inter text-slate-300">›</Text>
       </Pressable>

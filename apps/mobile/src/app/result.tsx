@@ -108,7 +108,7 @@ export default function ResultScreen() {
         </Pressable>
         <Text className="font-display text-xl tracking-tight text-ink">{s.result.title}</Text>
         <Pressable
-          onPress={() => router.push('/profile')}
+          onPress={() => router.push('/profiles')}
           accessibilityRole="button"
           hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
         >
@@ -314,8 +314,10 @@ export default function ResultScreen() {
         {/* footer */}
         <View className="rounded-2xl bg-slate-100 p-4">
           <Text className="font-inter text-[12px] leading-relaxed text-slate-500">{s.result.footer}</Text>
-          <Pressable onPress={() => router.push('/profile')} className="mt-2">
-            <Text className="font-inter-semibold text-[12px] text-accent-700">{s.result.profileLink} ›</Text>
+          <Pressable onPress={() => router.push('/profiles')} className="mt-2">
+            <Text className="font-inter-semibold text-[12px] text-accent-700">
+              {s.result.profileLink}: {activeProfile.meta.name} ›
+            </Text>
           </Pressable>
         </View>
       </View>

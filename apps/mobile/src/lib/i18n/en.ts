@@ -15,6 +15,9 @@ export const en = {
     close: 'Close',
     calculate: 'Calculate',
     profile: 'Profile',
+    cancel: 'Cancel',
+    delete: 'Delete',
+    save: 'Save',
   },
   disclaimer: {
     title: 'Before you start',
@@ -121,7 +124,7 @@ export const en = {
     noWarningsNote: 'No hard/soft safety limits exceeded for this line. Still, verify results independently.',
     footer:
       'Clinical decision-support tool · the ordering clinician is solely responsible · verify results independently.',
-    profileLink: 'Profile: ESPGHAN 2018 Reference — guideline-based, not center-validated',
+    profileLink: 'Active profile',
   },
   profile: {
     title: 'Active profile',
@@ -135,6 +138,28 @@ export const en = {
     representativeBody:
       "Dextrose % limits, stock concentrations and product details aren't single numbers in the guideline — they're physicochemical approximations / pharmacy facts. Each center must replace and validate them.",
     sourceList: 'Full source list:',
+  },
+  profiles: {
+    title: 'Profiles',
+    activeBadge: 'Active',
+    reference: 'Reference',
+    custom: 'Custom',
+    setActive: 'Set as active',
+    isActive: 'Active profile',
+    clone: 'Clone',
+    edit: 'Edit',
+    newProfile: 'New profile',
+    builtinNote: 'Built-in guideline reference — it cannot be edited or deleted. Clone it to build your own.',
+    notCenterValidated: 'guideline-based reference · not center-validated',
+    centerProfile: 'center profile · verify against your own protocol',
+    dosingTitle: 'Dosing summary',
+    unitsTitle: 'Units',
+    energyLabel: 'Energy',
+    electrolyteLabel: 'Electrolyte',
+    defaultLineLabel: 'Default line',
+    deleteTitle: 'Delete profile',
+    deleteConfirm: 'Delete this profile? This cannot be undone.',
+    notFound: 'Profile not found.',
   },
 } as const;
 
