@@ -7,6 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/sahinparlak/tpn-calculator/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/sahinparlak/tpn-calculator/actions/workflows/ci.yml/badge.svg"></a>
+  <img alt="Coverage: 98%" src="https://img.shields.io/badge/coverage-98%25-brightgreen.svg">
   <a href="#license"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <img alt="Status: early development" src="https://img.shields.io/badge/status-early%20development-orange.svg">
 </p>
@@ -16,6 +17,17 @@
 > [`DISCLAIMER.md`](./DISCLAIMER.md).
 
 ---
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/disclaimer.png" width="30%" alt="Disclaimer and consent gate">
+  &nbsp;
+  <img src="docs/screenshots/result.png" width="30%" alt="Result screen with hard safety warnings">
+  &nbsp;
+  <img src="docs/screenshots/profiles.png" width="30%" alt="Profile management (Phase 3)">
+</p>
+<p align="center"><sub>Disclaimer gate · result with hard safety warnings · profile management (Phase 3)</sub></p>
 
 ## Why
 
@@ -65,7 +77,7 @@ See [`docs/PROFILE.md`](./docs/PROFILE.md) and the
 - [x] **Phase 0** — Design lock: domain model, profile schema, plan
 - [x] **Phase 1** — `@tpn/engine`: calculation core + test suite
 - [x] **Phase 2** — Mobile MVP (Expo): patient → result flow, embedded ESPGHAN profile, warnings, a11y + tests
-- [ ] **Phase 3** — Profile management UI + units
+- [x] **Phase 3** — Profile management UI + units: profile selection, full editor with live validation, JSON import/export
 - [ ] **Phase 4** — Web app + live demo
 - [ ] **Phase 5** — i18n, docs site, community
 

@@ -5,6 +5,9 @@
 // In React Native each font weight is a separate family, so weights are exposed as
 // explicit `font-*` families (e.g. font-inter-semibold) rather than font-weight.
 module.exports = {
+  // Class-based dark mode (not the default `media`), so NativeWind can manage the
+  // color scheme on web without throwing. The app ships a single light theme.
+  darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
