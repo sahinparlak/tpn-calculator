@@ -65,6 +65,6 @@ release. Grouped by priority. Items here feed the roadmap in [`PLAN.md`](./PLAN.
 
 ## D. Product (already on the roadmap)
 
-- [ ] Mobile MVP (Expo) — Phase 2
+- [x] Mobile MVP (Expo) — Phase 2
 - [ ] Web app + live demo — Phase 4
 - [ ] README: live-demo link + screenshot/GIF once an app exists
