@@ -100,7 +100,7 @@ The model — and the modeling choices a clinician should review — is:
 0. **Design lock** ✅ — domain model, profile schema, repo scaffold, plan.
 1. **Engine** ✅ — `@tpn/engine` calculation logic + comprehensive tests. (A
    filled clinical profile still requires a center's own numbers.)
-2. **Mobile MVP** — Expo: single-patient calculation, single profile, output + warnings.
+2. **Mobile MVP** ✅ — Expo: single-patient calculation, single profile, output + warnings.
 3. **Configuration UI** — profile selection/editing, unit system, multiple profiles.
 4. **Web** — web build from the same engine + live demo (GitHub Pages/Vercel).
 5. **Internationalization** — additional languages (English-first), docs site, community infrastructure.

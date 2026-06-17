@@ -1,56 +1,65 @@
-# Welcome to your Expo app 👋
+# TPN Calculator — Mobile (Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+The mobile app for [TPN Calculator](../../README.md) — Phase 2 MVP. It calculates
+a single patient's parenteral nutrition prescription against one embedded center
+profile and surfaces the engine's hard/soft safety warnings.
 
-## Get started
+**No clinical logic lives in this app.** Every calculation goes through
+[`@tpn/engine`](../../packages/engine); the profile is opaque configuration. The
+app is presentation only.
 
-1. Install dependencies
+## Stack
 
-   ```bash
-   npm install
-   ```
+- **Expo SDK 56** + **Expo Router** (file-based routing under `src/app/`)
+- **NativeWind v4** (Tailwind for React Native) — design tokens in `tailwind.config.js`
+- **Zustand** for form state, **AsyncStorage** for the accept-once disclaimer
+- **i18n-ready**: all UI strings live in `src/lib/i18n/en.ts` behind `useStrings()`;
+  the device locale (via `expo-localization`) selects the dictionary, falling back
+  to English. English-only for now — add a `tr.ts` of the same shape to localize.
 
-2. Start the app
+## Screens
 
-   ```bash
-   npx expo start
-   ```
+`src/app/` — Disclaimer gate (+ Terms modal) → Patient (validated input) → Result
+(`calculateTPN` output, warnings, provenance) → Profile (read-only source summary).
 
-In the output, you'll find options to open the app in a
+## Run
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+From the repo root, install once and build the engine:
 
 ```bash
-npm run reset-project
+npm install
+npm run build -w @tpn/engine
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Then start the app:
 
-### Other setup steps
+```bash
+cd apps/mobile
+npx expo start            # then press i (iOS sim), a (Android), or w (web)
+npx expo start --web      # browser preview
+npx expo start --ios      # iOS Simulator (needs Xcode)
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+On a physical phone, scan the QR code with **Expo Go**. No custom native modules,
+so Expo Go / simulator / web all work.
 
-## Learn more
+## Test
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+cd apps/mobile
+npm test                  # jest-expo: integration + render smoke tests
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- `test/calculation.test.ts` — store → embedded profile → engine integration.
+- `test/result-screen.test.tsx` — Result screen render smoke (hard-warning banner).
 
-## Join the community
+> Uses `@testing-library/react-native` **v13** + `react-test-renderer` (v14's new
+> renderer does not settle with jest-expo 56 / React 19).
 
-Join our community of developers creating universal apps.
+## Notes
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Design: Direction C "Modern Editorial" — warm off-white ground, navy (`#1d3a6e`)
+  accent, Fraunces + Inter; red/amber reserved for safety ("color = meaning").
+- The embedded profile is the guideline-based ESPGHAN 2018 reference — **not
+  center-validated**. Verify results against your own protocol. See
+  [`DISCLAIMER.md`](../../DISCLAIMER.md).
