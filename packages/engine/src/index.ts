@@ -11,4 +11,10 @@
 
 export * from './types.js';
 export { calculateTPN } from './calculate.js';
-export { TPNInputError, TPNProfileError } from './internal/validate.js';
+export {
+  type ProfileError,
+  type ProfileValidation,
+  TPNInputError,
+  TPNProfileError,
+  validateProfile,
+} from './internal/validate.js';

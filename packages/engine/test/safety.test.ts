@@ -65,4 +65,18 @@ describe('evaluateSafety', () => {
     profile.safety.rules.push({ id: 'made-up-rule', level: 'hard', threshold: 1 });
     expect(evaluateSafety(safeCtx, central, profile)).toEqual([]);
   });
+
+  it('fires a rule via a literal threshold and falls back to a default message', () => {
+    const profile = cloneProfile();
+    profile.safety.rules = [{ id: 'gir-max', level: 'hard', threshold: 12 }]; // no ref, no message
+    const warning = evaluateSafety({ ...safeCtx, gir: 13 }, central, profile).find((w) => w.ruleId === 'gir-max');
+    expect(warning).toBeDefined();
+    expect(warning?.message).toContain('gir-max');
+  });
+
+  it('skips a known rule whose ref does not resolve to a threshold', () => {
+    const profile = cloneProfile();
+    profile.safety.rules = [{ id: 'gir-max', level: 'hard', ref: 'glucose.nope' }];
+    expect(ids(evaluateSafety({ ...safeCtx, gir: 13 }, central, profile))).not.toContain('gir-max');
+  });
 });

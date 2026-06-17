@@ -10,6 +10,17 @@ a profile directly determines the correctness of the output.
 
 ## Getting started
 
+You can author a profile **in the app** or **as a JSON file** — both produce the
+same configuration the engine consumes.
+
+**In the app (Phase 3):** open Profiles, **Clone** the builtin reference (or any
+profile), then **Edit** every field. The editor validates each change with the
+engine's `validateProfile` and blocks saving until the profile is valid. Use
+**Export** to copy a profile's JSON to the clipboard, and **Import** to paste one
+back in (it is validated before it is added). The builtin reference is read-only.
+
+**As a JSON file:**
+
 1. Copy [`../profiles/erciyes-nicu.template.json`](../profiles/erciyes-nicu.template.json)
    and rename it for your center.
 2. Fill in every clinical value that is `null` and every text marked `FILL_ME`.

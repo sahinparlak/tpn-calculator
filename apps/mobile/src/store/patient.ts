@@ -1,6 +1,6 @@
 import type { LineType, PatientInput } from '@tpn/engine';
 import { create } from 'zustand';
-import { activeProfile } from '../lib/profile';
+import { BUILTIN_PROFILE } from '../lib/profile';
 
 // Raw form state — numeric fields are kept as strings while typing; parsing and
 // validation happen on submit (see `toPatientInput`). No clinical logic here.
@@ -19,7 +19,9 @@ export interface PatientFormState {
 const initial = {
   weight: '',
   age: '',
-  line: activeProfile.safety.defaultLine,
+  // Default line follows the active profile when one is selected (see the patient
+  // screen); the builtin default is the safe initial value before that.
+  line: BUILTIN_PROFILE.safety.defaultLine,
   gestationalAge: '',
   phototherapy: false,
   radiantWarmer: false,
