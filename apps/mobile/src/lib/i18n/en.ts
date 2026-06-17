@@ -161,6 +161,32 @@ export const en = {
     deleteConfirm: 'Delete this profile? This cannot be undone.',
     notFound: 'Profile not found.',
   },
+  editor: {
+    title: 'Edit profile',
+    save: 'Save changes',
+    invalid: 'Fix the highlighted fields to save',
+    readonly: 'The built-in reference cannot be edited — clone it to make your own.',
+    addStep: '+ Add step',
+    addStock: '+ Add stock',
+    addRule: '+ Add rule',
+    remove: 'Remove',
+    openEnded: 'Open-ended (this day and onward)',
+    sections: {
+      meta: 'Identity',
+      units: 'Units',
+      patient: 'Patient model',
+      fluid: 'Fluid',
+      energy: 'Energy',
+      glucose: 'Glucose',
+      aminoAcid: 'Amino acid',
+      lipid: 'Lipid',
+      electrolytes: 'Electrolytes',
+      additives: 'Additives',
+      osmolarity: 'Osmolarity',
+      caPhosphate: 'Calcium–phosphate',
+      safety: 'Safety rules',
+    },
+  },
 } as const;
 
 export type Strings = typeof en;
