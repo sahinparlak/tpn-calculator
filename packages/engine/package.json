@@ -1,6 +1,6 @@
 {
   "name": "@tpn/engine",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Framework-agnostic TPN calculation engine. All clinical values come from a center profile; none are hardcoded.",
   "license": "MIT",
   "author": "Sahin Parlak",
