@@ -1,6 +1,9 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    "includes": ["**", "!apps/mobile/design/**", "!apps/mobile/assets/**", "!apps/mobile/scripts/reset-project.js"]
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
@@ -10,7 +13,10 @@
   },
   "linter": {
     "enabled": true,
-    "rules": { "recommended": true }
+    "rules": {
+      "recommended": true,
+      "suspicious": { "useBiomeIgnoreFolder": "off" }
+    }
   },
   "assist": {
     "actions": { "source": { "organizeImports": "off" } }
