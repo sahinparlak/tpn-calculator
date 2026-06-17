@@ -24,5 +24,15 @@
   },
   "json": {
     "formatter": { "enabled": false }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.css"],
+      "linter": {
+        "rules": {
+          "suspicious": { "noUnknownAtRules": "off" }
+        }
+      }
+    }
+  ]
 }

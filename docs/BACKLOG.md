@@ -34,6 +34,16 @@ release. Grouped by priority. Items here feed the roadmap in [`PLAN.md`](./PLAN.
       pharmacy-tested physical compatibility (R 8.7) — it gives **no numeric product
       threshold**. Consider adding a molar Ca:P-ratio safety rule (guideline-traceable)
       and keep `caPhosphate.maxSolubilityProduct` as a pharmacy/product value.
+      Note: the mobile app now labels this output "Ca × P **solubility product**" with
+      its `(mmol/L)²` unit and a "simplified estimate" caveat, to prevent it being read
+      against the familiar mg²/dL² (~<200) precipitation threshold.
+- [ ] **Final-dextrose concentration basis.** `glucose.finalConcentrationPct` is
+      computed over the **dextrose-water (aqueous) phase only** — `glucoseGrams /
+      dextroseWaterMl` (`calculate.ts:51`, `glucose.volumeMl === dextroseWaterMl` at
+      `calculate.ts:91`), not over total or aqueous-minus-additives volume. Decide and
+      document the intended basis (peripheral tolerance is usually judged on the final
+      in-line concentration the vein sees). The mobile app now labels it "Final dextrose
+      **(aqueous phase)**" to make the current basis explicit pending this decision.
 
 ## B. Engineering maturity / OSS showcase
 
