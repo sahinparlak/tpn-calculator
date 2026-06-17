@@ -9,3 +9,9 @@ jest.mock('expo-localization', () => ({
 jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
 );
+
+// `expo-clipboard` (profile import/export) has no JS implementation under Node.
+jest.mock('expo-clipboard', () => ({
+  getStringAsync: jest.fn(async () => ''),
+  setStringAsync: jest.fn(async () => true),
+}));

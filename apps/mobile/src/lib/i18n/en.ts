@@ -160,6 +160,18 @@ export const en = {
     deleteTitle: 'Delete profile',
     deleteConfirm: 'Delete this profile? This cannot be undone.',
     notFound: 'Profile not found.',
+    importAction: 'Import',
+    exportAction: 'Export',
+  },
+  io: {
+    importTitle: 'Import profile',
+    importHint: 'Paste a profile JSON below. It is validated before it is added.',
+    paste: 'Paste from clipboard',
+    importButton: 'Validate & import',
+    invalidJson: "That isn't valid JSON.",
+    invalidProfile: 'The profile has problems — fix them and try again:',
+    exportedTitle: 'Exported',
+    exportedBody: 'Profile JSON copied to the clipboard.',
   },
   editor: {
     title: 'Edit profile',

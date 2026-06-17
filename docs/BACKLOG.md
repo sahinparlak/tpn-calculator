@@ -66,5 +66,10 @@ release. Grouped by priority. Items here feed the roadmap in [`PLAN.md`](./PLAN.
 ## D. Product (already on the roadmap)
 
 - [x] Mobile MVP (Expo) — Phase 2
+- [x] Configuration UI — Phase 3: multiple device-persisted profiles, profile
+      selection, a full in-app editor validated by `validateProfile`,
+      unit-system-aware output, and JSON import/export. Builtin reference is
+      clone-only. (`expo-document-picker` file import remains a possible follow-up;
+      import is clipboard/paste-based for now.)
 - [ ] Web app + live demo — Phase 4
 - [ ] README: live-demo link + screenshot/GIF once an app exists

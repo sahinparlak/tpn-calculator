@@ -101,7 +101,10 @@ The model — and the modeling choices a clinician should review — is:
 1. **Engine** ✅ — `@tpn/engine` calculation logic + comprehensive tests. (A
    filled clinical profile still requires a center's own numbers.)
 2. **Mobile MVP** ✅ — Expo: single-patient calculation, single profile, output + warnings.
-3. **Configuration UI** — profile selection/editing, unit system, multiple profiles.
+3. **Configuration UI** ✅ — multiple profiles persisted on device, profile
+   selection, a full in-app editor (every field, validated by the engine's
+   `validateProfile`), unit-system-aware output, and JSON import/export. The
+   bundled reference ships as an undeletable, uneditable builtin (clone to edit).
 4. **Web** — web build from the same engine + live demo (GitHub Pages/Vercel).
 5. **Internationalization** — additional languages (English-first), docs site, community infrastructure.
 

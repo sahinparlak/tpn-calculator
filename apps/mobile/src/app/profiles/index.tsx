@@ -40,6 +40,14 @@ export default function ProfilesListScreen() {
       >
         <Text className="font-inter-semibold text-[15px] text-accent-700">+ {s.profiles.newProfile}</Text>
       </Pressable>
+
+      <Pressable
+        onPress={() => router.push('/profiles/import')}
+        accessibilityRole="button"
+        className="mt-2 w-full items-center rounded-2xl border border-slate-200 bg-white py-3.5 active:opacity-90"
+      >
+        <Text className="font-inter-semibold text-[15px] text-accent-700">{s.profiles.importAction}</Text>
+      </Pressable>
     </Screen>
   );
 }

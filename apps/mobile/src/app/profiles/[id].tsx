@@ -1,3 +1,4 @@
+import * as Clipboard from 'expo-clipboard';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Alert, Pressable, Text, View } from 'react-native';
 import { Card } from '../../components/ui/Card';
@@ -34,6 +35,11 @@ export default function ProfileDetailScreen() {
   function onClone() {
     const newId = clone(profileId);
     if (newId) router.replace(`/profiles/${newId}`);
+  }
+
+  async function onExport() {
+    await Clipboard.setStringAsync(JSON.stringify(profile, null, 2));
+    Alert.alert(s.io.exportedTitle, s.io.exportedBody);
   }
 
   function onDelete() {
@@ -130,6 +136,13 @@ export default function ProfileDetailScreen() {
             </Pressable>
           ) : null}
         </View>
+        <Pressable
+          onPress={onExport}
+          accessibilityRole="button"
+          className="w-full items-center rounded-2xl border border-slate-200 bg-white py-3.5 active:opacity-90"
+        >
+          <Text className="font-inter-semibold text-[14px] text-accent-700">{s.profiles.exportAction}</Text>
+        </Pressable>
       </View>
 
       {/* dosing summary */}
