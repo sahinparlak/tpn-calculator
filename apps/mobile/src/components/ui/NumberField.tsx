@@ -46,6 +46,7 @@ export function NumberField({
           placeholder={placeholder}
           placeholderTextColor="#d6d1c6"
           keyboardType={decimal ? 'decimal-pad' : 'number-pad'}
+          accessibilityLabel={[label, hint, unit ? `in ${unit}` : null, error].filter(Boolean).join(', ')}
           className={cn('flex-1 font-inter-semibold text-ink', big ? 'text-2xl' : 'text-lg')}
         />
         {unit ? <Text className="font-inter-medium text-sm text-slate-400">{unit}</Text> : null}

@@ -28,7 +28,11 @@ export default function PatientScreen() {
     <Screen>
       <View className="mb-4 flex-row items-center justify-between">
         <Text className="font-display text-2xl tracking-tight text-ink">{s.patient.title}</Text>
-        <Pressable onPress={() => router.push('/profile')} accessibilityRole="button">
+        <Pressable
+          onPress={() => router.push('/profile')}
+          accessibilityRole="button"
+          hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
+        >
           <Text className="font-inter-medium text-sm text-accent-700">{s.common.profile} ›</Text>
         </Pressable>
       </View>

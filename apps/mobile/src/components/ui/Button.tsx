@@ -15,6 +15,7 @@ export function Button({ label, onPress, disabled, className }: ButtonProps) {
       onPress={onPress}
       disabled={disabled}
       accessibilityRole="button"
+      accessibilityState={{ disabled: !!disabled }}
       className={cn(
         'w-full items-center rounded-2xl py-4 active:opacity-90',
         disabled ? 'bg-slate-300' : 'bg-accent-600',

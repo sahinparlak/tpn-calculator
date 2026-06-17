@@ -33,8 +33,10 @@ function KV({ k, v, danger }: { k: string; v: string; danger?: boolean }) {
 
 function HardBanner({ warnings, title, countLabel }: { warnings: Warning[]; title: string; countLabel: string }) {
   return (
-    <View className="mb-4 rounded-2xl bg-[#7f1d1d] p-4">
-      <Text className="font-display text-[16px] text-white">⛔ {title}</Text>
+    <View className="mb-4 rounded-2xl bg-[#7f1d1d] p-4" accessibilityLiveRegion="assertive">
+      <Text className="font-display text-[16px] text-white" accessibilityRole="header">
+        ⛔ {title}
+      </Text>
       <Text className="mt-1 font-inter text-[13px] text-red-100">
         {warnings.length} {countLabel}
       </Text>
@@ -94,11 +96,19 @@ export default function ResultScreen() {
     <Screen>
       {/* header */}
       <View className="mb-3 flex-row items-center justify-between">
-        <Pressable onPress={() => router.back()} accessibilityRole="button">
+        <Pressable
+          onPress={() => router.back()}
+          accessibilityRole="button"
+          hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
+        >
           <Text className="font-inter-medium text-sm text-accent-700">‹ {s.common.edit}</Text>
         </Pressable>
         <Text className="font-display text-xl tracking-tight text-ink">{s.result.title}</Text>
-        <Pressable onPress={() => router.push('/profile')} accessibilityRole="button">
+        <Pressable
+          onPress={() => router.push('/profile')}
+          accessibilityRole="button"
+          hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
+        >
           <Text className="font-inter-medium text-sm text-accent-700">{s.common.profile} ›</Text>
         </Pressable>
       </View>
