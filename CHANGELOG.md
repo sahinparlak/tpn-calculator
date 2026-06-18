@@ -14,6 +14,16 @@ All notable changes to this project are documented here. The format is based on
   distribution, osmolarity, Ca–P estimate). Ships the guideline-based ESPGHAN 2018 reference profile.
 - **GitHub Pages deployment** — `deploy.yml` workflow builds the engine and the web app and publishes
   the demo to GitHub Pages on every relevant push to `main`.
+- **Web profile management (full parity with mobile)** — multiple device-persisted profiles
+  (`localStorage`), profile selection, a full in-app editor for every profile field validated live by
+  the engine's `validateProfile`, JSON import/export, and a clone-only builtin reference. The demo is
+  no longer read-only: visitors can change any clinical value and watch the calculation update.
+
+### Changed
+
+- **CI/CD** — bumped GitHub Actions to their node24 majors (checkout v7, setup-node v6,
+  configure-pages v6, upload-pages-artifact v5, deploy-pages v5) and moved off end-of-life Node 20
+  (CI on Node 22/24, `.nvmrc` 22).
 
 ## [0.1.0] — 2026-06-17
 
