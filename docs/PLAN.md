@@ -105,7 +105,9 @@ The model — and the modeling choices a clinician should review — is:
    selection, a full in-app editor (every field, validated by the engine's
    `validateProfile`), unit-system-aware output, and JSON import/export. The
    bundled reference ships as an undeletable, uneditable builtin (clone to edit).
-4. **Web** — web build from the same engine + live demo (GitHub Pages/Vercel).
+4. **Web** ✅ — `apps/web`, a React + Vite live demo on the same engine (disclaimer gate,
+   live-recalculating patient form, full result view with hard/soft warnings), deployed to
+   GitHub Pages via `deploy.yml`.
 5. **Internationalization** — additional languages (English-first), docs site, community infrastructure.
 
 ## 8. License and legal
