@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <strong>▶ <a href="https://sahinparlak.github.io/tpn-calculator/">Live demo</a></strong>
+  <strong>▶ <a href="https://sahinparlak.github.io/tpn-calculator/">Try it live</a></strong>
 </p>
 
 > ⚠️ **Clinical decision-support tool — not a medical device.** The prescribing
@@ -57,7 +57,7 @@ tpn-calculator/                 (monorepo · npm workspaces)
 │   └── engine/        @tpn/engine — framework-agnostic calc core, fully tested
 ├── apps/
 │   ├── mobile/        Expo (React Native) · iOS + Android   ← built first
-│   └── web/           React + Vite · live in-browser demo    ← Phase 4
+│   └── web/           React + Vite · in-browser web app       ← Phase 4
 ├── profiles/          center profiles + JSON Schema
 └── docs/              plan, profile-authoring guide
 ```
@@ -82,7 +82,7 @@ See [`docs/PROFILE.md`](./docs/PROFILE.md) and the
 - [x] **Phase 1** — `@tpn/engine`: calculation core + test suite
 - [x] **Phase 2** — Mobile MVP (Expo): patient → result flow, embedded ESPGHAN profile, warnings, a11y + tests
 - [x] **Phase 3** — Profile management UI + units: profile selection, full editor with live validation, JSON import/export
-- [x] **Phase 4** — Web app + live demo: React + Vite build of the same engine, deployed to GitHub Pages
+- [x] **Phase 4** — Web app: React + Vite build of the same engine — full calculator + profile management, deployed to GitHub Pages
 - [ ] **Phase 5** — i18n, docs site, community
 
 Full plan: [`docs/PLAN.md`](./docs/PLAN.md).

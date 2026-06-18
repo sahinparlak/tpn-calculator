@@ -1,6 +1,6 @@
 # @tpn/web
 
-Live in-browser demo of the TPN Calculator — **React + Vite** on top of
+In-browser web app for the TPN Calculator — **React + Vite** on top of
 [`@tpn/engine`](../../packages/engine). It runs the same calculation core as the
 mobile app: a disclaimer gate, a patient form that recalculates live, and a full
 result view with hard/soft safety warnings.
@@ -8,7 +8,7 @@ result view with hard/soft safety warnings.
 It also ships **full profile management** (parity with the mobile app): multiple
 profiles persisted in `localStorage`, profile selection, a complete in-app editor
 for every field — validated live by the engine's `validateProfile` — and JSON
-import/export. The bundled reference is clone-only. So the demo isn't read-only:
+import/export. The bundled reference is clone-only. So it isn't read-only:
 change any clinical value and the result updates.
 
 It ships the guideline-based **ESPGHAN 2018 reference profile** (read-only here);

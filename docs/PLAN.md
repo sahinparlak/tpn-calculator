@@ -29,7 +29,7 @@ here is mandatory.
 - **Monorepo:** npm workspaces (best Expo compatibility; easy to switch to pnpm later)
 - **`@tpn/engine`:** pure TypeScript, publishable npm core
 - **`apps/mobile`:** Expo (React Native) — iOS + Android (first)
-- **`apps/web`:** React/Next — live in-browser demo (next)
+- **`apps/web`:** React + Vite — in-browser web app
 - **Test:** Vitest · **CI:** GitHub Actions · **License:** MIT
 - **Language:** English-first; no localization initially.
 
@@ -105,9 +105,10 @@ The model — and the modeling choices a clinician should review — is:
    selection, a full in-app editor (every field, validated by the engine's
    `validateProfile`), unit-system-aware output, and JSON import/export. The
    bundled reference ships as an undeletable, uneditable builtin (clone to edit).
-4. **Web** ✅ — `apps/web`, a React + Vite live demo on the same engine (disclaimer gate,
-   live-recalculating patient form, full result view with hard/soft warnings), deployed to
-   GitHub Pages via `deploy.yml`.
+4. **Web** ✅ — `apps/web`, a React + Vite web app on the same engine (disclaimer gate,
+   live-recalculating patient form, full result view with hard/soft warnings, and full profile
+   management — editor, multiple profiles, JSON import/export), deployed to GitHub Pages via
+   `deploy.yml`.
 5. **Internationalization** — additional languages (English-first), docs site, community infrastructure.
 
 ## 8. License and legal
@@ -118,6 +119,6 @@ clause provides legal protection. Because this is a medical tool, a visible
 
 ## 9. Prestige criteria (ongoing)
 
-Working live demo · high test coverage + green CI · polished README · reusable
+Working hosted web app · high test coverage + green CI · polished README · reusable
 core published to npm · clean architecture · release tags · `CONTRIBUTING` +
 issue templates · documentation.
