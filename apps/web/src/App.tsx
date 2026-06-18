@@ -59,9 +59,6 @@ export function App() {
           >
             {strings.app.name}
           </button>
-          <span className="rounded-full bg-accent-50 px-2 py-0.5 text-[11px] font-semibold text-accent-700">
-            {strings.app.demoBadge}
-          </span>
           {route.view === 'calculator' ? (
             <button
               type="button"

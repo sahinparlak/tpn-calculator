@@ -2,7 +2,7 @@ import type { TPNProfile } from '@tpn/engine';
 
 // The bundled reference profile. Source of truth lives at the repo root (shared
 // with the mobile app); the engine treats it as opaque configuration — no
-// clinical constants live in this app. The web demo seeds this guideline-derived
+// clinical constants live in this app. The web app seeds this guideline-derived
 // reference as the read-only "builtin"; users clone, edit or import on top of it.
 import espghanProfile from '../../../../profiles/espghan-2018-reference.json';
 

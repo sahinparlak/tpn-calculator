@@ -71,6 +71,6 @@ release. Grouped by priority. Items here feed the roadmap in [`PLAN.md`](./PLAN.
       unit-system-aware output, and JSON import/export. Builtin reference is
       clone-only. (`expo-document-picker` file import remains a possible follow-up;
       import is clipboard/paste-based for now.)
-- [x] Web app + live demo — Phase 4: `apps/web` (React + Vite) on the same engine, deployed to
-      GitHub Pages (`deploy.yml`).
-- [x] README: live-demo link added. (A web screenshot/GIF is still a nice-to-have.)
+- [x] Web app — Phase 4: `apps/web` (React + Vite) on the same engine, full calculator + profile
+      management, deployed to GitHub Pages (`deploy.yml`).
+- [x] README: web-app link added. (A web screenshot/GIF is still a nice-to-have.)

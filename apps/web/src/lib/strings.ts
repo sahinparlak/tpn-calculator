@@ -1,11 +1,10 @@
-// English UI copy for the web demo. Wording mirrors the mobile app's i18n
+// English UI copy for the web app. Wording mirrors the mobile app's i18n
 // dictionary (single source of clinical phrasing); the engine's own output
 // (component labels, warning messages) is surfaced directly.
 export const strings = {
   app: {
     name: 'TPN Calculator',
     tagline: 'Configurable parenteral nutrition for neonatal & pediatric patients',
-    demoBadge: 'Live demo',
     repo: 'github.com/sahinparlak/tpn-calculator',
   },
   common: {
